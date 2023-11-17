@@ -1,6 +1,8 @@
-const defineJestConfig = require('@tarojs/test-utils-react/dist/jest.js').default
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable import/no-commonjs */
+const defineJestConfig = require("@tarojs/test-utils-react/dist/jest.js").default;
 
 module.exports = defineJestConfig({
-  testEnvironment: 'jsdom',
-  testMatch: ['<rootDir>/__tests__/?(*.)+(spec|test).[jt]s?(x)']
-})
+  testEnvironment: "jsdom",
+  testMatch: ["<rootDir>/__tests__/?(*.)+(spec|test).[jt]s?(x)"],
+});
