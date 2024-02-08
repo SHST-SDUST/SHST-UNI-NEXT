@@ -1,5 +1,12 @@
 export default defineAppConfig({
-  pages: ["pages/index/tips/index", "pages/app/404/index", "pages/app/webview/index"],
+  pages: [
+    "pages/index/index/index",
+    "pages/func/index/index",
+    "pages/sw/index/index",
+    "pages/user/index/index",
+    "pages/app/404/index",
+    "pages/app/webview/index",
+  ],
   window: {
     navigationBarTextStyle: "black",
     navigationBarTitleText: "山科小站",
@@ -14,25 +21,25 @@ export default defineAppConfig({
       {
         iconPath: "./static/index.png",
         selectedIconPath: "./static/index-active.png",
-        pagePath: "pages/index/tips/index",
+        pagePath: "pages/index/index/index",
         text: "首页",
       },
       {
         iconPath: "./static/func.png",
         selectedIconPath: "./static/func-active.png",
-        pagePath: "pages/index/tips/index",
+        pagePath: "pages/func/index/index",
         text: "功能",
       },
       {
-        iconPath: "./static/news.png",
-        selectedIconPath: "./static/news-active.png",
-        pagePath: "pages/index/tips/index",
+        iconPath: "./static/sw.png",
+        selectedIconPath: "./static/sw-active.png",
+        pagePath: "pages/sw/index/index",
         text: "强智",
       },
       {
         iconPath: "./static/user.png",
         selectedIconPath: "./static/user-active.png",
-        pagePath: "pages/index/tips/index",
+        pagePath: "pages/index/index/index",
         text: "用户",
       },
     ],
