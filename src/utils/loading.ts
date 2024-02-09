@@ -1,6 +1,6 @@
 import Taro from "@tarojs/taro";
 
-import { data } from "./global";
+import { globalAppData } from "./global";
 
 type Options = { load: number; title?: string };
 
@@ -32,7 +32,7 @@ export const Loading = {
       case 2:
         Taro.hideNavigationBarLoading();
         Taro.setNavigationBarTitle({
-          title: options.title || data.project,
+          title: options.title || globalAppData.project,
         });
         break;
       case 3:

@@ -1,4 +1,4 @@
-import { Storage } from "./storage";
+import { LocalStorage } from "./storage";
 
 export const Cookie = {
   get: (res: { header: { [key: string]: string } }): string => {
@@ -11,10 +11,10 @@ export const Cookie = {
         }
       }
       console.log("SetCookie:", cookies);
-      Storage.setPromise("cookies", cookies);
+      LocalStorage.setPromise("cookies", cookies);
     } else {
       console.log("Get Cookie From Cache");
-      cookies = Storage.get("cookies") || "";
+      cookies = LocalStorage.get("cookies") || "";
     }
     return cookies;
   },

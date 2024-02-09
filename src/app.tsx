@@ -4,12 +4,13 @@ import { useError, useLaunch, usePageNotFound } from "@tarojs/taro";
 import type { FC } from "react";
 
 import { ErrorBoundary } from "./components/error";
+import { App as AppAPI } from "./utils/app";
 import { Report } from "./utils/report";
 import { Toast } from "./utils/toast";
 
 const App: FC = ({ children }) => {
   useLaunch(() => {
-    console.log("APP INIT");
+    AppAPI.init();
   });
 
   usePageNotFound(() => {

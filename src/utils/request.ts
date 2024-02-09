@@ -64,8 +64,9 @@ export const xhr = (requestInfo: RequestInfo): void => {
       header: headers,
       success: function (res) {
         if (options.cookie && !headers.cookie) {
-          headers.cookie = Cookie.get(res);
-          options.fail({ ...res, errMsg: "No Cookies" });
+          const cookie = Cookie.get(res);
+          headers.cookie = cookie;
+          !cookie && options.fail({ ...res, errMsg: "No Cookies" });
         }
         if (res.statusCode === 200) {
           if (
@@ -132,4 +133,4 @@ export const request = <T extends ResponseDataType>(
 xhr.headers = headers;
 request.headers = headers;
 
-export default { xhr, request };
+export const HTTP = { xhr, request };

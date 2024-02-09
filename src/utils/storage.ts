@@ -26,7 +26,7 @@ const convertToStr = <T = string>(origin: T, expire?: Date | null) => {
   return JSON.stringify(data);
 };
 
-export const Storage = {
+export const LocalStorage = {
   get: function <T = string>(originKey: string): null | T {
     const key = convertKey(originKey);
     const str = Taro.getStorageSync(key);

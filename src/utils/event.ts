@@ -1,6 +1,6 @@
 import { EventBus as AbstractEventBus } from "laser-utils";
 
-const EVENTS_TYPE = ["ON_LAUNCH", "PLACEHOLDER"] as const;
+const EVENTS_TYPE = ["ON_LOADED", "PLACEHOLDER"] as const;
 
 export const EVENTS_ENUM = EVENTS_TYPE.reduce(
   (acc, cur) => ({ ...acc, [cur]: `__${cur}__` }),
@@ -8,7 +8,7 @@ export const EVENTS_ENUM = EVENTS_TYPE.reduce(
 );
 
 interface EventBusParams {
-  [EVENTS_ENUM.ON_LAUNCH]: null;
+  [EVENTS_ENUM.ON_LOADED]: null;
 }
 
 declare module "laser-utils" {
