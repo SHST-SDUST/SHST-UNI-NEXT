@@ -3,3 +3,13 @@
 page {
   color: var(--color-text-1);
 }
+
+.arco-icon {
+  color: inherit;
+  display: inline-block;
+  font-style: normal;
+  height: 1em;
+  stroke: currentcolor;
+  vertical-align: -2px;
+  width: 1em;
+}
