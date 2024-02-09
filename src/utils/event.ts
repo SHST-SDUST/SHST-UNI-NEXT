@@ -1,3 +1,4 @@
+import type { Keys } from "laser-utils";
 import { EventBus as AbstractEventBus } from "laser-utils";
 
 const EVENTS_TYPE = ["ON_LOADED", "PLACEHOLDER"] as const;
@@ -16,4 +17,11 @@ declare module "laser-utils" {
   interface EventBusType extends EventBusParams {}
 }
 
-export const Event = new AbstractEventBus();
+class EventBus extends AbstractEventBus {
+  public commit<T extends Keys>(key: T, value: EventBusParams[T]) {
+    console.log("Event Commit:", key);
+    this.emit(key, value);
+  }
+}
+
+export const Event = new EventBus();

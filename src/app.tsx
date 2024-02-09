@@ -5,16 +5,18 @@ import type { FC } from "react";
 
 import { ErrorBoundary } from "./components/error";
 import { App as AppAPI } from "./utils/app";
+import { Nav } from "./utils/nav";
 import { Report } from "./utils/report";
 import { Toast } from "./utils/toast";
 
 const App: FC = ({ children }) => {
   useLaunch(() => {
+    AppAPI.update();
     AppAPI.init();
   });
 
   usePageNotFound(() => {
-    Toast.info("页面不存在");
+    Nav.launch("pages/app/404/index");
   });
 
   useError(err => {

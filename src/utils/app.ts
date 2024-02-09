@@ -90,7 +90,7 @@ export const App = {
         return Promise.resolve();
       })
       .then(() => {
-        Event.emit(EVENTS_ENUM.ON_LOADED, null);
+        Event.commit(EVENTS_ENUM.ON_LOADED, null);
       })
       .catch((err: Error) => {
         console.log(err);
