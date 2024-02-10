@@ -35,7 +35,7 @@ export default defineAppConfig({
       {
         iconPath: "./static/user.png",
         selectedIconPath: "./static/user-active.png",
-        pagePath: "pages/index/index/index",
+        pagePath: "pages/user/index/index",
         text: "用户",
       },
     ],
