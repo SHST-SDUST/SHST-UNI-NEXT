@@ -1,3 +1,5 @@
+import { DEV_HOST, PROD_HOST } from "./constant";
+
 export interface Data {
   // 基本配置
   url: string;
@@ -55,8 +57,8 @@ console.log("Version:", globalAppData.version);
 
 if (process.env.NODE_ENV === "development") {
   console.log("Environment:", "development");
-  globalAppData.url = "http://dev.shst.touchczy.top";
+  globalAppData.url = DEV_HOST;
 } else {
   console.log("Environment:", "production");
-  globalAppData.url = "https://shst.touchczy.top";
+  globalAppData.url = PROD_HOST;
 }

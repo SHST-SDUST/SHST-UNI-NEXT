@@ -1,0 +1,26 @@
+@import '../../styles/variable.scss';
+
+.container {
+  background-color: var(--color-bg-2);
+}
+
+.head {
+  @include flex-justify-between;
+  @include flex-align-center;
+
+  border-bottom: 1px solid var(--color-border-3);
+  box-sizing: border-box;
+  padding: 10px 8px 8px;
+
+  .captain {
+    @include flex-align-center;
+
+    padding-left: 5px;
+  }
+}
+
+.card {
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  padding: 11px;
+}

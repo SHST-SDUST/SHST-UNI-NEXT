@@ -32,7 +32,7 @@ export default defineConfig(async (merge, { command, mode }) => {
     mini: {
       postcss: {
         pxtransform: {
-          enable: true,
+          enable: false,
           config: {},
         },
         url: {

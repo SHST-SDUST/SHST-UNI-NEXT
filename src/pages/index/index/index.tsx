@@ -1,16 +1,30 @@
-import { Text, View } from "@tarojs/components";
-import { useLoad } from "@tarojs/taro";
+import { Button, View } from "@tarojs/components";
+import { cs, DateTime } from "laser-utils";
+import React from "react";
+
+import { Layout } from "@/components/layout";
+import { Weather } from "@/components/weather";
 
 import styles from "./index.module.scss";
 
-export default function Index() {
-  useLoad(() => {
-    console.log("Page loaded.");
-  });
+const NOW = new DateTime().format("yyyy-MM-dd K");
 
+export default function Index() {
   return (
-    <View className={styles.index}>
-      <Text>Hello world!</Text>
-    </View>
+    <React.Fragment>
+      <Layout
+        title={NOW}
+        captainSlot={
+          <View className={styles.yCenter}>
+            <Button
+              open-type="share"
+              className={cs("shst-icon icon-fenxiang", styles.shareButton)}
+            ></Button>
+          </View>
+        }
+      >
+        <Weather></Weather>
+      </Layout>
+    </React.Fragment>
   );
 }

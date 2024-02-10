@@ -51,32 +51,36 @@ export const LocalStorage = {
     return new Promise<T | null>(resolve => {
       Taro.getStorage({
         key,
-        success: res => {
+      })
+        .then(res => {
           if (res.data === "") return null;
           const origin = convertToOrigin<T>(res.data);
           if (origin === null) this.removePromise(key);
           resolve(origin);
-        },
-        fail: () => {
+        })
+        .catch(() => {
           resolve(null);
-        },
-      });
+        });
     });
   },
   getOrigin: function (originKey: string): string | null {
     const key = convertKey(originKey);
     return Taro.getStorageSync(key);
   },
-  setPromise: function <T = string>(originKey: string, data: T, expire = null): Promise<boolean> {
+  setPromise: function <T = string>(
+    originKey: string,
+    data: T,
+    expire: Date | null = null
+  ): Promise<boolean> {
     const key = convertKey(originKey);
     const str = convertToStr<T>(data, expire);
     return new Promise<boolean>(resolve => {
       Taro.setStorage({
         key,
         data: str,
-        success: () => resolve(true),
-        fail: () => resolve(false),
-      });
+      })
+        .then(() => resolve(true))
+        .catch(() => resolve(false));
     });
   },
   remove: function (originKey: string): void {

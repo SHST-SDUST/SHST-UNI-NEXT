@@ -15,5 +15,8 @@ module.exports = {
     "selector-type-no-unknown": null,
     "max-nesting-depth": 6,
     "selector-max-compound-selectors": 6,
+    "selector-class-pattern": "^[a-z][a-zA-Z0-9_-]+$",
+    "selector-id-pattern": "^[a-z][a-zA-Z0-9_-]+$",
+    "scss/at-import-partial-extension-blacklist": null,
   },
 };

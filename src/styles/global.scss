@@ -1,15 +1,49 @@
-@import './color';
+@import './asse.scss';
+@import './icon.scss';
+@import './color.scss';
 
 page {
+  background-color: var(--color-fill-1);
+  box-sizing: border-box;
   color: var(--color-text-1);
+  /* stylelint-disable-next-line max-line-length */
+  font-family: Inter, -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'noto sans', 'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+  margin: 0;
+  padding: 10px;
+  text-size-adjust: 100%;
 }
 
-.arco-icon {
+.shst-icon {
   color: inherit;
-  display: inline-block;
-  font-style: normal;
-  height: 1em;
   stroke: currentcolor;
   vertical-align: -2px;
-  width: 1em;
+}
+
+button::after {
+  border: unset;
+}
+
+button {
+  background: #fff;
+  border: unset;
+  box-sizing: unset;
+  color: inherit;
+  font-size: inherit;
+  height: auto;
+  line-height: unset;
+  margin: 0;
+  padding: 0;
+}
+
+.adapt {
+  box-sizing: border-box;
+}
+
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
