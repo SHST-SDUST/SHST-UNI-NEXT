@@ -1,9 +1,0 @@
-{
-  "miniprogramRoot": "./",
-  "projectname": "SHST-UNI-NEXT",
-  "appid": "wx387c0e87230e4cc9",
-  "setting": {
-    "es6": false,
-    "minified": false
-  }
-}

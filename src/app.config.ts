@@ -1,12 +1,7 @@
+import { PATH } from "./utils/constant";
+
 export default defineAppConfig({
-  pages: [
-    "pages/index/index/index",
-    "pages/func/index/index",
-    "pages/sw/index/index",
-    "pages/user/index/index",
-    "pages/app/404/index",
-    "pages/app/webview/index",
-  ],
+  pages: [...Object.values(PATH)],
   window: {
     navigationBarTextStyle: "black",
     navigationBarTitleText: "山科小站",

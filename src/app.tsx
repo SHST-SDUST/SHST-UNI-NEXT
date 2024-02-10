@@ -5,6 +5,7 @@ import type { FC } from "react";
 
 import { ErrorBoundary } from "./components/error";
 import { App as AppAPI } from "./utils/app";
+import { PATH } from "./utils/constant";
 import { Nav } from "./utils/nav";
 import { Report } from "./utils/report";
 import { Toast } from "./utils/toast";
@@ -16,7 +17,7 @@ const App: FC = ({ children }) => {
   });
 
   usePageNotFound(() => {
-    Nav.launch("pages/app/404/index");
+    Nav.launch(PATH.NOT_FOUNT);
   });
 
   useError(err => {

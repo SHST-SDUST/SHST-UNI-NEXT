@@ -1,6 +1,7 @@
 import Taro from "@tarojs/taro";
 
-const webviewPath = "/pages/app/webview/index?url=";
+import { PATH } from "./constant";
+
 const fail = (e: TaroGeneral.CallbackResult) => console.log(e);
 
 export const Nav = {
@@ -11,7 +12,7 @@ export const Nav = {
   redirect: (url: string) => Taro.redirectTo({ url, fail }),
   webview: (url: string) =>
     Taro.navigateTo({
-      url: webviewPath + encodeURIComponent(url),
+      url: PATH.WEBVIEW + "?url=" + encodeURIComponent(url),
       fail,
     }),
 };
