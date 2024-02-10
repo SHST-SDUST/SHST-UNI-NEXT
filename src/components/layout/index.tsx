@@ -25,7 +25,7 @@ export const Layout: FC<{
           <View
             className={styles.captain}
             style={{
-              borderLeft: `2px solid ${props.color || "#79B2F9"}`,
+              borderLeft: `2px solid ${props.color || "#165DFF"}`,
             }}
           >
             {props.title}

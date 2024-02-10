@@ -1,6 +1,6 @@
+@import './color.scss';
 @import './asse.scss';
 @import './icon.scss';
-@import './color.scss';
 
 page {
   background-color: var(--color-fill-1);
@@ -16,6 +16,12 @@ page {
   text-size-adjust: 100%;
 }
 
+@media (prefers-color-scheme: dark) {
+  page {
+    background-color: var(--color-bg-1);
+  }
+}
+
 .shst-icon {
   color: inherit;
   stroke: currentcolor;
@@ -27,7 +33,7 @@ button::after {
 }
 
 button {
-  background: #fff;
+  background: var(--color-bg-2);
   border: unset;
   box-sizing: unset;
   color: inherit;

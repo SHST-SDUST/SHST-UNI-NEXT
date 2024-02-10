@@ -3,15 +3,16 @@ import { PATH } from "./utils/constant";
 export default defineAppConfig({
   pages: [...Object.values(PATH)],
   window: {
-    navigationBarTextStyle: "black",
+    // @ts-expect-error color var
+    navigationBarTextStyle: "@navigationBarTextStyle",
     navigationBarTitleText: "山科小站",
-    navigationBarBackgroundColor: "#F1F1F1",
-    backgroundColor: "#F8F8F8",
+    navigationBarBackgroundColor: "@navigationBarBackgroundColor",
+    backgroundColor: "@backgroundColor",
   },
   tabBar: {
-    color: "#aaa",
-    selectedColor: "#8A8A8A",
-    backgroundColor: "#F7F7FA",
+    color: "@tabBarColor",
+    selectedColor: "@tabBarSelectedColor",
+    backgroundColor: "@backgroundColor",
     list: [
       {
         iconPath: "./static/index.png",
@@ -39,4 +40,6 @@ export default defineAppConfig({
       },
     ],
   },
+  darkmode: true,
+  themeLocation: "config/theme.json",
 });
