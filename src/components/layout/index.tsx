@@ -22,13 +22,12 @@ export const Layout: FC<{
             height: props.captainHeight ? props.captainHeight + "px" : "auto",
           }}
         >
-          <View
-            className={styles.captain}
-            style={{
-              borderLeft: `2px solid ${props.color || "#165DFF"}`,
-            }}
-          >
-            {props.title}
+          <View className={styles.left}>
+            <View
+              className={styles.vertical}
+              style={{ background: props.color || "#165DFF" }}
+            ></View>
+            <View className={styles.title}>{props.title}</View>
           </View>
           <View>{props.captainSlot}</View>
         </View>

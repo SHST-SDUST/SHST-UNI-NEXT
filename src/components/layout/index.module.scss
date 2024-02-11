@@ -12,10 +12,17 @@
   box-sizing: border-box;
   padding: 10px 8px 8px;
 
-  .captain {
-    @include flex-align-center;
+  .left {
+    display: flex;
+  }
 
-    padding-left: 5px;
+  .vertical {
+    margin: 2px 5px;
+    width: 2px;
+  }
+
+  .title {
+    align-self: center;
   }
 }
 
