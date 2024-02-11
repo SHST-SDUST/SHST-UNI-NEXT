@@ -5,10 +5,10 @@ import type { FC } from "react";
 import styles from "./index.module.scss";
 
 export const Layout: FC<{
-  title: string;
+  title?: string;
   color?: string;
+  topSpace?: boolean;
   className?: string;
-  minTopSpace?: boolean;
   inheritColor?: boolean;
   captainSlot?: React.ReactNode;
   captainHeight?: string | number;
@@ -37,7 +37,7 @@ export const Layout: FC<{
         className={styles.card}
         style={{
           color: props.inheritColor ? props.color : void 0,
-          paddingTop: props.minTopSpace && !props.title ? 3 : void 0,
+          paddingTop: !props.topSpace && props.title ? 3 : void 0,
         }}
       >
         {props.children}

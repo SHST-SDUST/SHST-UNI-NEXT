@@ -10,7 +10,7 @@ import { Nav } from "./utils/nav";
 import { Report } from "./utils/report";
 import { Toast } from "./utils/toast";
 
-const App: FC = ({ children }) => {
+const AppLauncher: FC = ({ children }) => {
   useLaunch(() => {
     AppAPI.update();
     AppAPI.init();
@@ -35,4 +35,4 @@ const App: FC = ({ children }) => {
   return <ErrorBoundary>{children}</ErrorBoundary>;
 };
 
-export default App;
+export default AppLauncher;

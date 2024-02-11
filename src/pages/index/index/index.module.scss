@@ -1,5 +1,14 @@
-@import '../../../styles/global';
-
 .shareButton {
   height: auto;
+}
+
+.swiperContainer {
+  border-radius: 3px;
+  box-sizing: border-box;
+  height: 170px;
+  overflow: hidden;
+
+  > swiper {
+    height: inherit;
+  }
 }

@@ -44,7 +44,7 @@ export const requestWeatherData = (): Promise<WeatherType | null> => {
     })
     .then(res => {
       if (res) {
-        LocalStorage.setPromise(STORAGE_KEY, res, new DateTime().nextDay());
+        LocalStorage.setPromise(STORAGE_KEY, res, new DateTime().nextHour());
       }
       return res;
     });

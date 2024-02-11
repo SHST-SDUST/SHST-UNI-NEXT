@@ -7,4 +7,11 @@ export class DateTime extends DT {
     date.setHours(0, 0, 0, 0);
     return new DateTime(date);
   }
+
+  public nextHour() {
+    const date = new Date(this.getTime());
+    date.setHours(date.getHours() + 1);
+    date.setMinutes(0, 0, 0);
+    return new DateTime(date);
+  }
 }
