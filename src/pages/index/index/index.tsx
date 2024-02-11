@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 
 import { Icon } from "@/components/icon";
 import { Layout } from "@/components/layout";
+import { OneSentence } from "@/components/one-sentence";
 import { Weather } from "@/components/weather";
 import { PATH } from "@/config/page";
 import { useMemoizedFn } from "@/hooks/use-memoized-fn";
@@ -66,7 +67,7 @@ export default function Index() {
       {/* 公告 */}
       <Layout title="系统公告">
         <View className={cs(styles.article, "text-ellipsis")} onClick={() => Nav.webview(postUrl)}>
-          <Icon space type="gonggao"></Icon>
+          <Icon space type="gonggao" className="a-lmr" size={16}></Icon>
           <RichText className="a-link" nodes={post}></RichText>
         </View>
         <Navigator
@@ -75,9 +76,13 @@ export default function Index() {
           className={cs(styles.article, "text-ellipsis")}
           hover-class="none"
         >
-          <Icon space type="gonggao"></Icon>
+          <Icon space type="gonggao" className="a-lmr" size={16}></Icon>
           <text className="a-link">更多公告...</text>
         </Navigator>
+      </Layout>
+      {/* 每日一句 */}
+      <Layout title="每日一句">
+        <OneSentence></OneSentence>
       </Layout>
     </React.Fragment>
   );

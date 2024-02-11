@@ -46,7 +46,7 @@ export const Weather: FC<{
           {desc}
         </View>
       </View>
-      <Divider></Divider>
+      <Divider margin={9}></Divider>
       <View className={styles.list}>
         {Array(7)
           .fill(null)

@@ -5,4 +5,7 @@ export const PROD_HOST = "https://shst.touchczy.top";
 
 export const CACHE = {
   WEATHER: "WEATHER",
+  SENTENCE: "SENTENCE",
+  SENTENCE_LONG: "SENTENCE_LONG",
+  USER: "USER",
 };

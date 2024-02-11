@@ -1,5 +1,6 @@
 import Taro from "@tarojs/taro";
 
+import { CACHE } from "./constant";
 import { Event, EVENTS_ENUM } from "./event";
 import type { InitDataType } from "./global";
 import { globalAppData } from "./global";
@@ -16,7 +17,7 @@ export const App = {
     return Taro.login()
       .then(({ errMsg, code }) => {
         if (!code) return Promise.reject(errMsg);
-        const userInfo = LocalStorage.get("user") || {};
+        const userInfo = LocalStorage.get(CACHE.USER) || {};
         interface InitRemoteRequest {
           status: number;
           openid: string;

@@ -7,6 +7,8 @@
 
   view,
   image {
+    @include flex-align-center;
+
     flex-shrink: 0;
   }
 }
