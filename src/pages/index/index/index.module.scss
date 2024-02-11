@@ -1,3 +1,5 @@
+@import '../../../styles//variable.scss';
+
 .shareButton {
   height: auto;
 }
@@ -11,4 +13,11 @@
   > swiper {
     height: inherit;
   }
+}
+
+.article {
+  @include flex-align-center;
+
+  border-bottom: 1px solid var(--color-border-1);
+  padding: 10px 0;
 }
