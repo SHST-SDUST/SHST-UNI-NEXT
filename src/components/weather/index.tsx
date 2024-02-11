@@ -3,6 +3,7 @@ import { cs } from "laser-utils";
 import { type FC, useEffect, useState } from "react";
 
 import { PROD_HOST } from "@/utils/constant";
+import { Toast } from "@/utils/toast";
 
 import { Divider } from "../divider";
 import styles from "./index.module.scss";
@@ -41,7 +42,9 @@ export const Weather: FC<{
           src={`${STATIC_PATH + sky}.png`}
         ></Image>
         <View>{`${min}°C - ${max}°C`}</View>
-        <View className="text-ellipsis a-flex-full a-lml">{desc}</View>
+        <View className="text-ellipsis a-flex-full a-lml" onClick={() => Toast.info(desc)}>
+          {desc}
+        </View>
       </View>
       <Divider></Divider>
       <View className={styles.list}>

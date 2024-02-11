@@ -1,8 +1,7 @@
+import { CACHE } from "@/utils/constant";
 import { DateTime } from "@/utils/datetime";
 import { HTTP } from "@/utils/request";
 import { LocalStorage } from "@/utils/storage";
-
-const STORAGE_KEY = "WEATHER_KEY";
 
 type WeatherType = {
   sky: string;
@@ -14,7 +13,7 @@ type WeatherType = {
 
 export const requestWeatherData = (): Promise<WeatherType | null> => {
   const id = (Math.random() * 100000000000) >> 0;
-  return LocalStorage.getPromise<WeatherType>(STORAGE_KEY)
+  return LocalStorage.getPromise<WeatherType>(CACHE.WEATHER)
     .then(res => {
       if (res) return res;
       return null;
@@ -44,7 +43,7 @@ export const requestWeatherData = (): Promise<WeatherType | null> => {
     })
     .then(res => {
       if (res) {
-        LocalStorage.setPromise(STORAGE_KEY, res, new DateTime().nextHour());
+        LocalStorage.setPromise(CACHE.WEATHER, res, new DateTime().nextHour());
       }
       return res;
     });

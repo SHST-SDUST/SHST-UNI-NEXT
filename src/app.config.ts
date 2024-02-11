@@ -1,7 +1,7 @@
 import { PATH } from "./utils/constant";
 
 export default defineAppConfig({
-  pages: [...Object.values(PATH)],
+  pages: [...Object.values(PATH).map(path => path.slice(1))],
   window: {
     // @ts-expect-error color var
     navigationBarTextStyle: "@navigationBarTextStyle",

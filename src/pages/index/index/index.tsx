@@ -6,6 +6,7 @@ import { Layout } from "@/components/layout";
 import { Weather } from "@/components/weather";
 import { useMemoizedFn } from "@/hooks/use-memoized-fn";
 import { App } from "@/utils/app";
+import { Nav } from "@/utils/nav";
 
 import styles from "./index.module.scss";
 import type { SwiperItemType } from "./model";
@@ -26,11 +27,15 @@ export default function Index() {
   return (
     <React.Fragment>
       {/* `Banner` */}
-      <Layout minTopSpace>
+      <Layout topSpace>
         <View className={styles.swiperContainer}>
           <Swiper indicatorDots interval={5000} duration={1000} autoplay circular>
             {swiper.map((item, index) => (
-              <SwiperItem key={index} className="x-center y-center">
+              <SwiperItem
+                key={index}
+                className="x-center y-center"
+                onClick={() => Nav.webview(item.url)}
+              >
                 <Image className="x-full" mode="aspectFill" src={item.img} lazyLoad></Image>
               </SwiperItem>
             ))}
@@ -51,6 +56,8 @@ export default function Index() {
       >
         <Weather></Weather>
       </Layout>
+      {/* 公告 */}
+      <Layout title="系统公告"></Layout>
     </React.Fragment>
   );
 }

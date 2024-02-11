@@ -1,7 +1,7 @@
 import Taro from "@tarojs/taro";
 import { DateTime } from "laser-utils";
 
-const convertKey = (key: string) => String(key).replace(/-storage$/g, "") + "-storage"; // 避免跟之前没有封装的缓存冲突
+const convertKey = (key: string) => "STORAGE:" + String(key);
 
 interface SavedStructure<T> {
   origin: T;
