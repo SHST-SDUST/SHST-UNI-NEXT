@@ -20,11 +20,17 @@ export default function Index() {
   const [swiper, setSwiper] = useState<SwiperItemType[]>([]);
   const [post, setPost] = useState("");
   const [postUrl, setPostUrl] = useState("");
+  const [tips, setTips] = useState("数据加载中");
+  const [tipsContent, setTipsContent] = useState("数据加载中");
 
   const onInit = () => {
     setSwiper(App.data.initData.ads);
     setPost(App.data.initData.articalName);
     setPostUrl(App.data.initData.articleUrl);
+    if (!App.data.isSHSTLogin) {
+      setTips("点我前去绑定教务系统账号");
+      setTipsContent("绑定强智教务系统就可以使用山科小站咯");
+    }
   };
   useOnLoadEffect(onInit);
 

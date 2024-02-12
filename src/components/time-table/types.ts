@@ -8,5 +8,7 @@ export type TimeTableItem = {
   background?: string; // 背景颜色 无则自动计算
   isCurWeek?: boolean; // 若为该周的课 则优先显示
 };
-
 export type TimeTableType = TimeTableItem[];
+
+export type DateRowItem = { weekDay: string; date: string; today: boolean };
+export type DateRowType = DateRowItem[];

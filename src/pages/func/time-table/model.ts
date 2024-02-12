@@ -12,7 +12,11 @@ type RemoteTableInfo = Array<null | {
   sjbz: number;
 }>;
 
-export function parseTimeTable(data: RemoteTableInfo, today = false): TimeTableType {
+export type RemoteTable = { data: RemoteTableInfo; status: number; week: number };
+export type TableData = Omit<RemoteTable, "status">;
+export type TableCache = { data: RemoteTableInfo; term: string };
+
+export const parseTimeTable = (data: RemoteTableInfo, today = false): TimeTableType => {
   const timeTable: Array<TimeTableItem> = [];
   let week = new DateTime().getDay() - 1;
   if (week === -1) week = 6; // 周日
@@ -37,4 +41,4 @@ export function parseTimeTable(data: RemoteTableInfo, today = false): TimeTableT
     });
   });
   return timeTable;
-}
+};

@@ -8,4 +8,5 @@ export const CACHE = {
   SENTENCE: "SENTENCE",
   SENTENCE_LONG: "SENTENCE_LONG",
   USER: "USER",
+  TABLE_WEEK: "TABLE:",
 };

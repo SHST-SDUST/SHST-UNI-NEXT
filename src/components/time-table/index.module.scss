@@ -1,0 +1,19 @@
+.weekUnit {
+  font-size: 10px;
+  padding: 5px 0 1px;
+  text-align: center;
+  width: 100%;
+
+  .line {
+    font-size: 8px;
+    padding: 3px 0;
+  }
+
+  .border {
+    border-bottom: 3px solid transparent;
+  }
+
+  .active {
+    border-color: var(--color-fill-2);
+  }
+}
