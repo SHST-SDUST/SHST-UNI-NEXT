@@ -1,13 +1,13 @@
 import { Button, Image, Navigator, RichText, Swiper, SwiperItem, View } from "@tarojs/components";
 import { cs, DateTime } from "laser-utils";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { Icon } from "@/components/icon";
 import { Layout } from "@/components/layout";
 import { OneSentence } from "@/components/one-sentence";
 import { Weather } from "@/components/weather";
 import { PATH } from "@/config/page";
-import { useMemoizedFn } from "@/hooks/use-memoized-fn";
+import { useOnLoadEffect } from "@/hooks/use-onload-effect";
 import { App } from "@/utils/app";
 import { Nav } from "@/utils/nav";
 
@@ -21,15 +21,12 @@ export default function Index() {
   const [post, setPost] = useState("");
   const [postUrl, setPostUrl] = useState("");
 
-  const onInit = useMemoizedFn(() => {
+  const onInit = () => {
     setSwiper(App.data.initData.ads);
     setPost(App.data.initData.articalName);
     setPostUrl(App.data.initData.articleUrl);
-  });
-
-  useEffect(() => {
-    App.onload(() => onInit());
-  }, [onInit]);
+  };
+  useOnLoadEffect(onInit);
 
   return (
     <React.Fragment>
