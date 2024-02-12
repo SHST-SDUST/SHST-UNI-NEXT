@@ -34,13 +34,14 @@ export const requestRemoteTimeTable = (load = 1, throttle = false): Promise<Tabl
   });
 };
 
-export const requestTimeTable = (): Promise<TableData | null> => {
+export const requestTimeTable = (cache = true): Promise<TableData | null> => {
   const week = App.data.curWeek;
   const key = CACHE.TABLE_WEEK + week;
-  return LocalStorage.getPromise<TableCache>(key).then(cache => {
-    if (cache && cache.term === App.data.curTerm) {
+  if (cache) return requestRemoteTimeTable();
+  return LocalStorage.getPromise<TableCache>(key).then(data => {
+    if (data && data.term === App.data.curTerm) {
       console.log("GET TABLE FROM CACHE");
-      return { data: cache.data, week: week };
+      return { data: data.data, week: week };
     } else {
       return requestRemoteTimeTable();
     }

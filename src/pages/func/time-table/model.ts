@@ -1,4 +1,5 @@
 import type { TimeTableItem, TimeTableType } from "@/components/time-table/types";
+import { App } from "@/utils/app";
 import { DateTime } from "@/utils/datetime";
 
 type RemoteTableInfo = Array<null | {
@@ -20,6 +21,7 @@ export const parseTimeTable = (data: RemoteTableInfo, today = false): TimeTableT
   const timeTable: Array<TimeTableItem> = [];
   let week = new DateTime().getDay() - 1;
   if (week === -1) week = 6; // 周日
+  const colorList = App.data.colorList;
   data.forEach(value => {
     if (!value) return void 0;
     const day = ~~value.kcsj[0] - 1;
@@ -31,10 +33,14 @@ export const parseTimeTable = (data: RemoteTableInfo, today = false): TimeTableT
     serialGroup.forEach(v => {
       if (!v) return void 0;
       const serial = Number(v.slice(1, 2)) >> 1;
+      const className = value.kcmc.split("（")[0];
+      const uniqueNum = className.split("").reduce((pre, cur) => pre + cur.charCodeAt(0), 0);
+      const background = colorList[uniqueNum % colorList.length];
       timeTable.push({
         serial,
         weekDay: day,
-        className: value.kcmc.split("（")[0],
+        className,
+        background,
         classRoom: value.jsmc,
         teacher: value.jsxm,
       });

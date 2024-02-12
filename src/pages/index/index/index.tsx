@@ -2,17 +2,20 @@ import { Button, Image, Navigator, RichText, Swiper, SwiperItem, View } from "@t
 import { cs, DateTime } from "laser-utils";
 import React, { useState } from "react";
 
+import { Dot } from "@/components/dot";
 import { Icon } from "@/components/icon";
 import { Layout } from "@/components/layout";
 import { OneSentence } from "@/components/one-sentence";
+import type { TimeTableType } from "@/components/time-table/types";
 import { Weather } from "@/components/weather";
 import { PATH } from "@/config/page";
 import { useOnLoadEffect } from "@/hooks/use-onload-effect";
+import { parseTimeTable } from "@/pages/func/time-table/model";
 import { App } from "@/utils/app";
 import { Nav } from "@/utils/nav";
 
 import styles from "./index.module.scss";
-import type { SwiperItemType } from "./model";
+import { requestTimeTable, type SwiperItemType } from "./model";
 
 const NOW = new DateTime().format("yyyy-MM-dd K");
 
@@ -20,8 +23,28 @@ export default function Index() {
   const [swiper, setSwiper] = useState<SwiperItemType[]>([]);
   const [post, setPost] = useState("");
   const [postUrl, setPostUrl] = useState("");
+  const [table, setTable] = useState<TimeTableType>([]);
   const [tips, setTips] = useState("数据加载中");
   const [tipsContent, setTipsContent] = useState("数据加载中");
+
+  const getTimeTable = (cache = true) => {
+    requestTimeTable(cache).then(res => {
+      if (res) {
+        const list = parseTimeTable(res.data, true);
+        if (!list.length) {
+          setTips("No Class Today");
+          setTipsContent("今天没有课，快去自习室学习吧");
+        } else {
+          setTips("");
+          setTipsContent("");
+          setTable(list);
+        }
+      } else {
+        setTips("加载失败");
+        setTipsContent("加载失败了，重新登录试一下");
+      }
+    });
+  };
 
   const onInit = () => {
     setSwiper(App.data.initData.ads);
@@ -31,6 +54,7 @@ export default function Index() {
       setTips("点我前去绑定教务系统账号");
       setTipsContent("绑定强智教务系统就可以使用山科小站咯");
     }
+    getTimeTable();
   };
   useOnLoadEffect(onInit);
 
@@ -52,6 +76,7 @@ export default function Index() {
           </Swiper>
         </View>
       </Layout>
+
       {/* 天气 */}
       <Layout
         topSpace
@@ -67,6 +92,7 @@ export default function Index() {
       >
         <Weather></Weather>
       </Layout>
+
       {/* 公告 */}
       <Layout title="系统公告">
         <View className={cs(styles.article, "text-ellipsis")} onClick={() => Nav.webview(postUrl)}>
@@ -83,6 +109,36 @@ export default function Index() {
           <text className="a-link">更多公告...</text>
         </Navigator>
       </Layout>
+
+      {/* 今日课程 */}
+      <Layout title="今日课程">
+        {table.map((item, index) => (
+          <View key={index} className={styles.tableItem}>
+            <View className="y-center a-mr a-mt">
+              <Dot background={item.background || ""}></Dot>
+              <View className="a-lmr">
+                第{2 * (item.serial + 1) - 1}
+                {2 * (item.serial + 1)}节
+              </View>
+              <View>{item.teacher}</View>
+            </View>
+            <View className="y-center a-lmt a-mb">
+              <View className="a-ml a-lmr">{item.className}</View>
+              <View>{item.classRoom}</View>
+            </View>
+          </View>
+        ))}
+        {tips && (
+          <View className={styles.tableItem}>
+            <View className="y-center a-mt a-mr">
+              <Dot type="fill-2"></Dot>
+              <View>{tips}</View>
+            </View>
+            <View className="a-lmt a-mb a-ml a-mr">{tipsContent}</View>
+          </View>
+        )}
+      </Layout>
+
       {/* 每日一句 */}
       <Layout title="每日一句">
         <OneSentence></OneSentence>
