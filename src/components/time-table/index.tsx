@@ -29,12 +29,12 @@ export const TimeTable: FC<{
   const dateRow = useMemo(() => {
     const result: DateRowType = [];
     const today = new DateTime().format("MM/dd");
-    const curWeekDate = props.termStart ? new DateTime(props.termStart) : new DateTime();
-    const latest = curWeekDate.nextDay((props.week - 1) * 7);
+    const latest = props.termStart ? new DateTime(props.termStart) : new DateTime();
+    latest.nextDay((props.week - 1) * 7 - 1);
     for (let i = 0; i < 7; ++i) {
       latest.nextDay();
       const date = latest.format("MM/dd");
-      result.push({ weekDay: WEEK_DAY[i], date: date, today: date === today });
+      result.push({ weekDay: WEEK_DAY[i], date: date, today: !!props.termStart && date === today });
     }
     return result;
   }, [props.termStart, props.week]);
@@ -58,15 +58,16 @@ export const TimeTable: FC<{
   return (
     <View className={props.className}>
       <View className="a-flex">
-        {dateRow.map((item, index) => {
+        {dateRow.map((item, index) => (
           <View key={index} className={styles.weekUnit}>
             <View className={styles.line}>{item.weekDay}</View>
             <View className={cs(styles.line, styles.border, item.today && styles.active)}>
-              {item.weekDay}
+              {item.date}
             </View>
-          </View>;
-        })}
+          </View>
+        ))}
       </View>
+      <Divider margin={3}></Divider>
       {Array(5)
         .fill(0)
         .map((_, rowIndex) => (

@@ -1,3 +1,4 @@
+/* stylelint-disable selector-pseudo-class-no-unknown */
 @import '../../../styles/variable.scss';
 
 .tableHeader {
@@ -5,6 +6,13 @@
 
   height: 30px;
   padding: 5px;
+
+  :global(.a-btn) {
+    @include flex-center;
+
+    min-height: 15px;
+    min-width: 15px;
+  }
 }
 
 .week {

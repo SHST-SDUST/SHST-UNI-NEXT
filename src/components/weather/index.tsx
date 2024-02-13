@@ -43,7 +43,7 @@ export const Weather: FC<{
         ></Image>
         <View>{`${min}°C - ${max}°C`}</View>
         <View className="text-ellipsis a-flex-full a-lml" onClick={() => Toast.info(desc)}>
-          {desc}
+          <View className="text-ellipsis">{desc}</View>
         </View>
       </View>
       <Divider margin={9}></Divider>

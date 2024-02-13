@@ -5,8 +5,8 @@
 
   padding: 0 10px;
 
-  view,
-  image {
+  > view,
+  > image {
     @include flex-align-center;
 
     flex-shrink: 0;

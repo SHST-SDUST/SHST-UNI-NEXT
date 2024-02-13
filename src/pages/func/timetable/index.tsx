@@ -75,19 +75,16 @@ export default function TimeTablePage() {
         <View className={styles.tableHeader}>
           <View className={cs(styles.week, "a-lml")}>第{week}周</View>
           <View className="y-center">
-            <Navigator
-              className="a-btn a-btn-white a-btn-square a-lml y-center"
-              url={PATH.TIMETABLE_EDITOR}
-            >
+            <Navigator className="a-btn a-btn-square a-lml y-center" url={PATH.TIMETABLE_EDITOR}>
               <Icon type="jia"></Icon>
             </Navigator>
-            <View className="a-btn a-btn-white a-btn-square a-lml y-center" onClick={onRefresh}>
+            <View className="a-btn a-btn-square a-lml y-center" onClick={onRefresh}>
               <Icon type="shuaxin1"></Icon>
             </View>
-            <View className="a-btn a-btn-white a-btn-square a-lml y-center" onClick={onPrev}>
+            <View className="a-btn a-btn-square a-lml y-center" onClick={onPrev}>
               <Icon type="arrow-lift"></Icon>
             </View>
-            <View className="a-btn a-btn-white a-btn-square a-lml y-center" onClick={onNext}>
+            <View className="a-btn a-btn-square a-lml y-center" onClick={onNext}>
               <Icon type="arrow-right"></Icon>
             </View>
           </View>

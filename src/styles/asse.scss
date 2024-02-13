@@ -29,9 +29,8 @@ page {
 
 /* section --- Button --- section */
 .a-btn {
-  background: var(--color-green);
+  border: 1px solid var(--color-border-2);
   border-radius: 3px;
-  color: #fff;
   cursor: pointer;
   display: inline-block;
   font-size: 12px;

@@ -41,7 +41,7 @@ export const requestForSaveTable = (data: string) => {
         method: "POST",
         url: App.data.url + "/sw/setCustomTable",
         data: {
-          data: JSON.stringify(data),
+          data: data,
         },
       });
       resolve();

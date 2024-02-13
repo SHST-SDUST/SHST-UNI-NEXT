@@ -9,6 +9,7 @@ export const Layout: FC<{
   color?: string;
   topSpace?: boolean;
   className?: string;
+  cardClassName?: string;
   inheritColor?: boolean;
   captainSlot?: React.ReactNode;
   captainHeight?: string | number;
@@ -33,7 +34,7 @@ export const Layout: FC<{
         </View>
       )}
       <View
-        className={styles.card}
+        className={cs(styles.card, props.cardClassName)}
         style={{
           color: props.inheritColor ? props.color : void 0,
           paddingTop: !props.topSpace && props.title ? 3 : void 0,

@@ -20,7 +20,7 @@ export const Dialog: FC<{
     return null;
   }
   return (
-    <View className={styles.container} onClick={onClose}>
+    <View className={styles.container} onClick={onClose} catchMove>
       <View className={cs(styles.member, props.className)} onClick={stopBubble}>
         {props.children}
         <View onClick={onClose} className={cs(styles.close, "x-center y-center")}>

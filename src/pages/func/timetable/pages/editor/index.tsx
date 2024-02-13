@@ -244,22 +244,20 @@ export default function Editor() {
       <View className="a-lmt"></View>
 
       {table.map((item, index) => (
-        <Layout key={index}>
-          <View className={cs("a-flex-space-between")}>
-            <View>
-              <View className={styles.className}>
-                {item.className}
-                {editIndex === index ? "[编辑中]" : ""}
-              </View>
-              <View className="a-lmt">{item.term}</View>
-              <View className="a-lmt">
-                第{item.weekStart} - {item.weekEnd}周
-              </View>
-              <View className="a-flex a-lmt">
-                <View>周{item.day}</View>
-                <View className="a-lml">
-                  第{item.timeStart} - {item.timeEnd}节
-                </View>
+        <Layout key={index} cardClassName="a-flex-space-between">
+          <View>
+            <View className={styles.className}>
+              {item.className}
+              {editIndex === index ? "[编辑中]" : ""}
+            </View>
+            <View className="a-lmt">{item.term}</View>
+            <View className="a-lmt">
+              第{item.weekStart} - {item.weekEnd}周
+            </View>
+            <View className="a-flex a-lmt">
+              <View>周{item.day}</View>
+              <View className="a-lml">
+                第{item.timeStart} - {item.timeEnd}节
               </View>
             </View>
           </View>
