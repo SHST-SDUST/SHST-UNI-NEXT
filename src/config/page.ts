@@ -1,6 +1,4 @@
 export const PATH = {
-  NOT_FOUNT: "/pages/app/404/index",
-  WEBVIEW: "/pages/app/webview/index",
   HOME: "/pages/index/index/index",
   LOGIN: "/pages/app/login/index",
   FUNC: "/pages/func/index/index",
@@ -9,4 +7,6 @@ export const PATH = {
   PLUS: "/pages/plus/index/index",
   USER: "/pages/user/index/index",
   POST: "/pages/user/post/index",
+  NOT_FOUNT: "/pages/app/404/index",
+  WEBVIEW: "/pages/app/webview/index",
 };

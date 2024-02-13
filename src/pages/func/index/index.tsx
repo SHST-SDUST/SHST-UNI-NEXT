@@ -27,7 +27,7 @@ export default function Func() {
         <View className="y-center">
           <View className={styles.iconBox} onClick={() => onNav(PATH.TIMETABLE, true)}>
             <Icon type="kebiao"></Icon>
-            <View className={styles.text}></View>
+            <View className={styles.text}>查课表</View>
           </View>
         </View>
       </Layout>

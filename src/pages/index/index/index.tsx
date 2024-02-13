@@ -96,7 +96,11 @@ export default function Index() {
         title={NOW}
         captainSlot={
           <View className="y-center">
-            <Icon className="a-lmr" type="shuaxin" onClick={() => requestTimeTable(false)}></Icon>
+            <Icon
+              className="a-lmr"
+              type="shuaxin"
+              onClick={() => getTimeTable(false, 2, true)}
+            ></Icon>
             <Button
               open-type="share"
               className={cs("shst-icon icon-fenxiang", styles.shareButton)}

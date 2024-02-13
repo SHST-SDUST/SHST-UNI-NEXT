@@ -65,7 +65,7 @@ export const App = {
         const notify = response.initData.tips;
         App.data.point = notify;
         const point = LocalStorage.get("point");
-        if (point !== notify) Taro.showTabBarRedDot({ index: 3 });
+        if (point !== notify) Taro.showTabBarRedDot({ index: 3 }).catch(() => void 0);
 
         /* Openid */
         console.log("SetOpenid:", response.openid);

@@ -17,3 +17,33 @@
     border-color: var(--color-fill-2);
   }
 }
+
+.dialog {
+  width: 300px;
+}
+
+.placeholder {
+  min-height: 130px;
+}
+
+.tableBlock {
+  border-radius: 2px;
+  box-sizing: border-box;
+  color: #fff;
+  font-size: 12px;
+  height: 100%;
+  margin: 0 1.5px;
+  padding: 3px;
+  position: relative;
+  word-break: break-all;
+}
+
+.triangle {
+  border-left: 13px solid transparent;
+  border-top: 13px solid rgba(255, 255, 255, 0.8);
+  height: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 0;
+}

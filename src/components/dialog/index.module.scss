@@ -32,7 +32,7 @@
 }
 
 .close {
-  background-color: $a-font-grey;
+  background-color: var(--color-fill-4);
   border-radius: 50%;
   height: 15px;
   position: absolute;

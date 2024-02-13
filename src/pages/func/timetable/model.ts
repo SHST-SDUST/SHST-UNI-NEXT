@@ -27,7 +27,7 @@ export const parseTimeTable = (data: RemoteTableInfo, today = false): TimeTableT
   const colorList = App.data.colorList;
   for (const value of data) {
     if (!value) continue;
-    const day = ~~value.kcsj[0] - 1;
+    const day = Number(value.kcsj[0]) - 1;
     if (today && day !== todayWeekDay) continue;
     const serialGroup = value.kcsj
       .slice(1)

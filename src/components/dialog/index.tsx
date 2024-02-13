@@ -8,6 +8,7 @@ import { Icon } from "../icon";
 import styles from "./index.module.scss";
 
 export const Dialog: FC<{
+  className?: string;
   visible: boolean;
   onClose: (visible: boolean) => void;
 }> = props => {
@@ -20,7 +21,7 @@ export const Dialog: FC<{
   }
   return (
     <View className={styles.container} onClick={onClose}>
-      <View className={styles.member} onClick={stopBubble}>
+      <View className={cs(styles.member, props.className)} onClick={stopBubble}>
         {props.children}
         <View onClick={onClose} className={cs(styles.close, "x-center y-center")}>
           <Icon type="x" className={styles.iconX}></Icon>
