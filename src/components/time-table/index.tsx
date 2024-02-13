@@ -19,7 +19,7 @@ export const TimeTable: FC<{
   const dateRow = useMemo(() => {
     const result: DateRowType = [];
     const today = new DateTime().format("MM/dd");
-    const curWeekDate = new DateTime(props.termStart);
+    const curWeekDate = props.termStart ? new DateTime(props.termStart) : new DateTime();
     const latest = curWeekDate.nextDay((props.week - 1) * 7);
     for (let i = 0; i < 7; ++i) {
       latest.nextDay();

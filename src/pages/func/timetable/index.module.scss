@@ -1,0 +1,12 @@
+@import '../../../styles/variable.scss';
+
+.tableHeader {
+  @include flex-justify-between;
+
+  height: 30px;
+  padding: 5px;
+}
+
+.week {
+  align-self: center;
+}

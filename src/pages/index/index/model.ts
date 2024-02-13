@@ -1,4 +1,4 @@
-import type { RemoteTable, TableCache, TableData } from "@/pages/func/time-table/model";
+import type { RemoteTable, TableCache, TableData } from "@/pages/func/timetable/model";
 import { App } from "@/utils/app";
 import { CACHE } from "@/utils/constant";
 import { HTTP } from "@/utils/request";
@@ -41,7 +41,7 @@ export const requestTimeTable = (
 ): Promise<TableData | null> => {
   const week = App.data.curWeek;
   const key = CACHE.TIMETABLE_WEEK + week;
-  if (!cache) return requestRemoteTimeTable();
+  if (!cache) return requestRemoteTimeTable(load, throttle);
   return LocalStorage.getPromise<TableCache>(key).then(data => {
     if (data && data.term === App.data.curTerm) {
       console.log("GET TABLE FROM CACHE");
