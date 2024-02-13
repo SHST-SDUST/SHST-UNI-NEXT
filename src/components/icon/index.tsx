@@ -1,3 +1,4 @@
+import type { ITouchEvent } from "@tarojs/components";
 import { Text } from "@tarojs/components";
 import { cs } from "laser-utils";
 import type { FC } from "react";
@@ -9,6 +10,7 @@ export const Icon: FC<{
   size?: number;
   className?: string;
   space?: boolean;
+  onClick?: (event: ITouchEvent) => void;
 }> = props => {
   return (
     <Text
@@ -18,6 +20,7 @@ export const Icon: FC<{
         props.space && styles.space,
         props.className
       )}
+      onClick={props.onClick}
       style={{ fontSize: props.size }}
     ></Text>
   );

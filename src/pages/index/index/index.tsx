@@ -82,7 +82,8 @@ export default function Index() {
         topSpace
         title={NOW}
         captainSlot={
-          <View className={styles.yCenter}>
+          <View className="y-center">
+            <Icon className="a-lmr" type="shuaxin" onClick={() => requestTimeTable(false)}></Icon>
             <Button
               open-type="share"
               className={cs("shst-icon icon-fenxiang", styles.shareButton)}
@@ -131,7 +132,7 @@ export default function Index() {
         {tips && (
           <View className={styles.tableItem}>
             <View className="y-center a-mt a-mr">
-              <Dot type="fill-2"></Dot>
+              <Dot type="fill-3"></Dot>
               <View>{tips}</View>
             </View>
             <View className="a-lmt a-mb a-ml a-mr">{tipsContent}</View>

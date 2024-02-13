@@ -19,13 +19,13 @@ export type TableCache = { data: RemoteTableInfo; term: string };
 
 export const parseTimeTable = (data: RemoteTableInfo, today = false): TimeTableType => {
   const timeTable: Array<TimeTableItem> = [];
-  let week = new DateTime().getDay() - 1;
-  if (week === -1) week = 6; // 周日
+  let todayWeekDay = new DateTime().getDay() - 1;
+  if (todayWeekDay === -1) todayWeekDay = 6; // 周日
   const colorList = App.data.colorList;
-  data.forEach(value => {
-    if (!value) return void 0;
+  for (const value of data) {
+    if (!value) continue;
     const day = ~~value.kcsj[0] - 1;
-    if (today && day !== week) return void 0;
+    if (today && day !== todayWeekDay) continue;
     const serialGroup = value.kcsj
       .slice(1)
       .replace(/(\d{4})/g, "$1,")
@@ -45,6 +45,6 @@ export const parseTimeTable = (data: RemoteTableInfo, today = false): TimeTableT
         teacher: value.jsxm,
       });
     });
-  });
+  }
   return timeTable;
 };

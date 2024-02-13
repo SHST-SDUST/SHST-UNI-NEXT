@@ -1,4 +1,5 @@
 import Taro from "@tarojs/taro";
+import { isArray, TSON } from "laser-utils";
 
 import { CACHE } from "./constant";
 import { Event, EVENTS_ENUM } from "./event";
@@ -49,8 +50,9 @@ export const App = {
         /* 自定义配色 */
         if (App.data.initData.custom) {
           const custom = App.data.initData.custom;
-          if (custom.color_list) {
-            App.data.colorList = JSON.parse(custom.color_list);
+          const colorList = custom.color_list && TSON.parse<string[]>(custom.color_list);
+          if (colorList && isArray(colorList) && colorList.length > 0) {
+            App.data.colorList = colorList;
           }
         }
 

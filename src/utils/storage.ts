@@ -8,7 +8,7 @@ interface SavedStructure<T> {
   expire: number;
 }
 
-const convertToOrigin = <T>(str: string): null | T => {
+function convertToOrigin<T>(str: string): null | T {
   try {
     const data: SavedStructure<T> = JSON.parse(str);
     if (Number.isNaN(data.expire)) return null; // 之前IOS的缓存可能会存储NaN
@@ -18,7 +18,7 @@ const convertToOrigin = <T>(str: string): null | T => {
     console.log(e);
     return null;
   }
-};
+}
 
 const convertToStr = <T = string>(origin: T, expire?: Date | null) => {
   const data: { origin: T; expire: null | number } = { origin, expire: null };
