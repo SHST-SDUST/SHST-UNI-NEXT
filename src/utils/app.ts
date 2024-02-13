@@ -2,7 +2,7 @@ import Taro from "@tarojs/taro";
 import { isArray, TSON } from "laser-utils";
 
 import { CACHE } from "./constant";
-import { Event, EVENTS_ENUM } from "./event";
+import { Event, EVENT_ENUM } from "./event";
 import type { InitDataType } from "./global";
 import { globalAppData } from "./global";
 import { Loading } from "./loading";
@@ -93,7 +93,7 @@ export const App = {
         return Promise.resolve();
       })
       .then(() => {
-        Event.commit(EVENTS_ENUM.ON_LOADED, null);
+        Event.commit(EVENT_ENUM.ON_LOADED, null);
       })
       .catch((err: Error) => {
         console.log(err);
@@ -119,7 +119,7 @@ export const App = {
           func();
           resolve();
         };
-        Event.once(EVENTS_ENUM.ON_LOADED, delay);
+        Event.once(EVENT_ENUM.ON_LOADED, delay);
       }
     });
   },

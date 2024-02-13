@@ -1,7 +1,6 @@
 import { View } from "@tarojs/components";
 import { cs } from "laser-utils";
 import type { FC } from "react";
-import { useEffect, useState } from "react";
 
 import { stopBubble } from "@/utils/stop";
 
@@ -10,18 +9,13 @@ import styles from "./index.module.scss";
 
 export const Dialog: FC<{
   visible: boolean;
+  onClose: (visible: boolean) => void;
 }> = props => {
-  const [visible, setVisible] = useState(props.visible);
-
-  useEffect(() => {
-    setVisible(props.visible);
-  }, [props.visible]);
-
   const onClose = () => {
-    setVisible(false);
+    props.onClose(false);
   };
 
-  if (!visible) {
+  if (!props.visible) {
     return null;
   }
   return (

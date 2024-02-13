@@ -24,7 +24,7 @@ export const requestRemoteTimeTable = (load = 1, throttle = false): Promise<Tabl
     if (res.data.status === 1) {
       const data = res.data;
       const table = data.data.filter(Boolean);
-      const key = CACHE.TIME_TABLE_WEEK + res.data.week;
+      const key = CACHE.TIMETABLE_WEEK + res.data.week;
       const cache: TableCache = { data: table, term: App.data.curTerm };
       LocalStorage.setPromise(key, cache);
       return { data: table, week: res.data.week };
@@ -34,16 +34,20 @@ export const requestRemoteTimeTable = (load = 1, throttle = false): Promise<Tabl
   });
 };
 
-export const requestTimeTable = (cache = true): Promise<TableData | null> => {
+export const requestTimeTable = (
+  cache = true,
+  load = 1,
+  throttle = false
+): Promise<TableData | null> => {
   const week = App.data.curWeek;
-  const key = CACHE.TIME_TABLE_WEEK + week;
+  const key = CACHE.TIMETABLE_WEEK + week;
   if (!cache) return requestRemoteTimeTable();
   return LocalStorage.getPromise<TableCache>(key).then(data => {
     if (data && data.term === App.data.curTerm) {
       console.log("GET TABLE FROM CACHE");
       return { data: data.data, week: week };
     } else {
-      return requestRemoteTimeTable();
+      return requestRemoteTimeTable(load, throttle);
     }
   });
 };

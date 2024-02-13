@@ -1,6 +1,6 @@
 import { Button, Image, Navigator, RichText, Swiper, SwiperItem, View } from "@tarojs/components";
 import { cs, DateTime } from "laser-utils";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Dot } from "@/components/dot";
 import { Icon } from "@/components/icon";
@@ -12,6 +12,7 @@ import { PATH } from "@/config/page";
 import { useOnLoadEffect } from "@/hooks/use-onload-effect";
 import { parseTimeTable } from "@/pages/func/time-table/model";
 import { App } from "@/utils/app";
+import { Event, EVENT_ENUM } from "@/utils/event";
 import { Nav } from "@/utils/nav";
 
 import styles from "./index.module.scss";
@@ -27,8 +28,8 @@ export default function Index() {
   const [tips, setTips] = useState("数据加载中");
   const [tipsContent, setTipsContent] = useState("数据加载中");
 
-  const getTimeTable = (cache = true) => {
-    requestTimeTable(cache).then(res => {
+  const getTimeTable = (cache = true, load = 1, throttle = false) => {
+    requestTimeTable(cache, load, throttle).then(res => {
       if (res) {
         const list = parseTimeTable(res.data, true);
         if (!list.length) {
@@ -57,6 +58,18 @@ export default function Index() {
     getTimeTable();
   };
   useOnLoadEffect(onInit);
+
+  const bindSHST = () => {
+    !App.data.isSHSTLogin && Nav.webview(PATH.LOGIN);
+  };
+
+  useEffect(() => {
+    const handler = () => getTimeTable(false, 2, true);
+    Event.on(EVENT_ENUM.REFRESH_TIMETABLE, handler);
+    return () => {
+      Event.off(EVENT_ENUM.REFRESH_TIMETABLE, handler);
+    };
+  }, []);
 
   return (
     <React.Fragment>
@@ -130,7 +143,7 @@ export default function Index() {
           </View>
         ))}
         {tips && (
-          <View className={styles.tableItem}>
+          <View className={styles.tableItem} onClick={bindSHST}>
             <View className="y-center a-mt a-mr">
               <Dot type="fill-3"></Dot>
               <View>{tips}</View>

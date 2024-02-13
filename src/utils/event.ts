@@ -1,15 +1,16 @@
 import type { Keys } from "laser-utils";
 import { EventBus as AbstractEventBus } from "laser-utils";
 
-const EVENTS_TYPE = ["ON_LOADED", "PLACEHOLDER"] as const;
+const EVENT_TYPE = ["ON_LOADED", "REFRESH_TIMETABLE"] as const;
 
-export const EVENTS_ENUM = EVENTS_TYPE.reduce(
+export const EVENT_ENUM = EVENT_TYPE.reduce(
   (acc, cur) => ({ ...acc, [cur]: `__${cur}__` }),
-  {} as { [K in (typeof EVENTS_TYPE)[number]]: `__${K}__` }
+  {} as { [K in (typeof EVENT_TYPE)[number]]: `__${K}__` }
 );
 
 interface EventBusParams {
-  [EVENTS_ENUM.ON_LOADED]: null;
+  [EVENT_ENUM.ON_LOADED]: null;
+  [EVENT_ENUM.REFRESH_TIMETABLE]: null;
 }
 
 declare module "laser-utils" {
@@ -18,6 +19,7 @@ declare module "laser-utils" {
 }
 
 class EventBus extends AbstractEventBus {
+  public TYPE = EVENT_ENUM;
   public commit<T extends Keys>(key: T, value: EventBusParams[T]) {
     console.log("Event Commit:", key);
     this.emit(key, value);
