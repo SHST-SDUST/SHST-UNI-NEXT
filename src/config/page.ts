@@ -4,6 +4,7 @@ export const PATH = {
   FUNC: "/pages/func/index/index",
   TIMETABLE: "/pages/func/timetable/index",
   TIMETABLE_EDITOR: "/pages/func/timetable/pages/editor/index",
+  CLASSROOM: "/pages/func/classroom/index",
   PLUS: "/pages/plus/index/index",
   USER: "/pages/user/index/index",
   POST: "/pages/user/post/index",

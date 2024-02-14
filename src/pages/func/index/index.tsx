@@ -29,6 +29,10 @@ export default function Func() {
             <Icon type="kebiao"></Icon>
             <View className={styles.text}>查课表</View>
           </View>
+          <View className={styles.iconBox} onClick={() => onNav(PATH.CLASSROOM, true)}>
+            <Icon type="classroom"></Icon>
+            <View className={styles.text}>查教室</View>
+          </View>
         </View>
       </Layout>
     </React.Fragment>
