@@ -3,6 +3,7 @@ import { PickerView, PickerViewColumn, View } from "@tarojs/components";
 import React, { useState } from "react";
 
 import { Layout } from "@/components/layout";
+import { Loading } from "@/utils/loading";
 
 import { NOW, QUERY_DATA, QUERY_FLOOR, QUERY_TIME } from "./constant";
 import styles from "./index.module.scss";
@@ -19,18 +20,22 @@ export default function Index() {
   };
 
   const onSearch = () => {
-    const [dataIndex, timeIndex, floorIndex] = index;
-    const date = QUERY_DATA[dataIndex][0];
-    const time = QUERY_TIME[timeIndex][1];
-    const floor = QUERY_FLOOR[floorIndex][1];
-    const campus = QUERY_FLOOR[floorIndex][2];
-    requestForClassRoom(date, time, floor, campus).then(res => {
-      if (res) {
-        setData(res);
-        setSuffix(date);
-        setPrefix(QUERY_TIME[timeIndex][2]);
-      }
-    });
+    Loading.start({ load: 2 });
+    setTimeout(() => {
+      const [dataIndex, timeIndex, floorIndex] = index;
+      const date = QUERY_DATA[dataIndex][0];
+      const time = QUERY_TIME[timeIndex][1];
+      const floor = QUERY_FLOOR[floorIndex][1];
+      const campus = QUERY_FLOOR[floorIndex][2];
+      requestForClassRoom(date, time, floor, campus).then(res => {
+        if (res) {
+          setData(res);
+          setSuffix(date);
+          setPrefix(QUERY_TIME[timeIndex][2]);
+        }
+        Loading.end({ load: 2 });
+      });
+    }, 100);
   };
 
   return (

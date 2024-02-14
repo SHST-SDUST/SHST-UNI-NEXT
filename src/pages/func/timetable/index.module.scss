@@ -10,8 +10,9 @@
   :global(.a-btn) {
     @include flex-center;
 
-    min-height: 15px;
-    min-width: 15px;
+    box-sizing: border-box;
+    min-height: 34px;
+    min-width: 34px;
   }
 }
 

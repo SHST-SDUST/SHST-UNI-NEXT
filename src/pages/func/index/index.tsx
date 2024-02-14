@@ -33,6 +33,10 @@ export default function Func() {
             <Icon type="classroom"></Icon>
             <View className={styles.text}>查教室</View>
           </View>
+          <View className={styles.iconBox} onClick={() => onNav(PATH.GRADE, true)}>
+            <Icon type="grade"></Icon>
+            <View className={styles.text}>查成绩</View>
+          </View>
         </View>
       </Layout>
     </React.Fragment>

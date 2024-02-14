@@ -5,6 +5,7 @@ export const PATH = {
   TIMETABLE: "/pages/func/timetable/index",
   TIMETABLE_EDITOR: "/pages/func/timetable/pages/editor/index",
   CLASSROOM: "/pages/func/classroom/index",
+  GRADE: "/pages/func/grade/index",
   PLUS: "/pages/plus/index/index",
   USER: "/pages/user/index/index",
   POST: "/pages/user/post/index",
