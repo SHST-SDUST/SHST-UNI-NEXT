@@ -3,7 +3,7 @@
     "tabBarColor": "#aaa",
     "tabBarSelectedColor": "#8A8A8A",
     "navigationBarTextStyle": "black",
-    "navigationBarBackgroundColor": "#F1F1F1",
+    "navigationBarBackgroundColor": "#e5e6eb",
     "backgroundColor": "#F8F8F8"
   },
   "dark": {

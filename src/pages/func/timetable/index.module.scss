@@ -11,8 +11,9 @@
     @include flex-center;
 
     box-sizing: border-box;
-    min-height: 34px;
-    min-width: 34px;
+    max-height: 32px;
+    min-height: 32px;
+    min-width: 32px;
   }
 }
 
