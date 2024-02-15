@@ -1,0 +1,9 @@
+/* stylelint-disable selector-pseudo-class-no-unknown */
+.container {
+  :global(.a-input) {
+    align-self: center;
+    border: 1px solid #eee;
+    border-radius: 3px;
+    width: 200px;
+  }
+}
