@@ -13,11 +13,6 @@
   },
   "compileType": "miniprogram",
   "usingComponents": true,
-  "permission": {
-    "scope.userLocation": {
-      "desc": "您的位置信息将用于嵙地图定位功能"
-    }
-  },
   "navigateToMiniProgramAppIdList": [
     "wxa53da62a53aaddea",
     "wx2facb7b57eedf7e6",
@@ -25,6 +20,5 @@
   ],
   "uniStatistics": {
     "enable": true
-  },
-  "requiredPrivateInfos": ["getLocation"]
+  }
 }

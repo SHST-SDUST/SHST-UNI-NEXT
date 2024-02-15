@@ -79,7 +79,7 @@ export default function Func() {
 
       <Layout title="科大" color="rgb(var(--purple-5))" inheritColor>
         <View className="y-center">
-          <View className={styles.iconBox} onClick={() => onNav(PATH.TIMETABLE, false)}>
+          <View className={styles.iconBox} onClick={() => onNav(PATH.MAP, false)}>
             <Icon type="map"></Icon>
             <View className={styles.text}>嵙地图</View>
           </View>
