@@ -1,4 +1,4 @@
-import type { RemoteTable, TableCache, TableData } from "@/pages/func/timetable/model";
+import type { RemoteTable, TableCache, TableData } from "@/pages/func/study/timetable/model";
 import { App } from "@/utils/app";
 import { CACHE } from "@/utils/constant";
 import { HTTP } from "@/utils/request";

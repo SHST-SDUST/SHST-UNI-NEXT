@@ -10,7 +10,7 @@ import type { TimeTableType } from "@/components/time-table/types";
 import { Weather } from "@/components/weather";
 import { PATH } from "@/config/page";
 import { useOnLoadEffect } from "@/hooks/use-onload-effect";
-import { parseTimeTable } from "@/pages/func/timetable/model";
+import { parseTimeTable } from "@/pages/func/study/timetable/model";
 import { App } from "@/utils/app";
 import { Event, EVENT_ENUM } from "@/utils/event";
 import { Nav } from "@/utils/nav";

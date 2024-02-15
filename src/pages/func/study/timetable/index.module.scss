@@ -1,5 +1,5 @@
 /* stylelint-disable selector-pseudo-class-no-unknown */
-@import '../../../styles/variable.scss';
+@import '../../../../styles/variable.scss';
 
 .tableHeader {
   @include flex-justify-between;
