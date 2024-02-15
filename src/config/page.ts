@@ -8,6 +8,7 @@ export const PATH = {
   GRADE: "/pages/func/study/grade/index",
   SHARE_TABLE: "/pages/func/study/share-table/index",
   LIBRARY: "/pages/func/information/library/index",
+  LIBRARY_DETAIL: "/pages/func/information/library/pages/detail/index",
   PLUS: "/pages/plus/index/index",
   USER: "/pages/user/index/index",
   POST: "/pages/user/post/index",

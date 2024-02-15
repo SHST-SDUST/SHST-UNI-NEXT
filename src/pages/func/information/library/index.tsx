@@ -5,6 +5,9 @@ import { useRef, useState } from "react";
 
 import { Icon } from "@/components/icon";
 import { Layout } from "@/components/layout";
+import { PATH } from "@/config/page";
+import { App } from "@/utils/app";
+import { Nav } from "@/utils/nav";
 import { RegExec } from "@/utils/regex";
 import { Toast } from "@/utils/toast";
 
@@ -84,6 +87,11 @@ export default function Index() {
     scrollToTop();
   };
 
+  const onViewDetail = (book: BookType) => {
+    App.data.tmp.book = book;
+    Nav.to(PATH.LIBRARY_DETAIL + "?id=" + book.id);
+  };
+
   return (
     <View className={styles.container}>
       <Layout title="图书检索">
@@ -98,15 +106,17 @@ export default function Index() {
           </View>
         </View>
       </Layout>
-      {books.map((book, key) => (
-        <Layout key={key}>
-          <View className="a-flex-space-between">
+      {books.map((book, index) => (
+        <Layout key={index}>
+          <View className="a-flex-space-between" onClick={() => onViewDetail(book)}>
             <View className="y-center a-overflow-hidden a-flex-full">
               <View className={cs(styles.img, "a-lmr a-flex-none")}>
                 <Image className={cs(styles.img, "x-center y-center")} src={book.img}></Image>
               </View>
               <View className={cs(styles.bookInfo, "text-ellipsis")}>
-                <View className="a-fontsize-16 text-ellipsis">{book.infoList[0]}</View>
+                <View className="a-fontsize-16 text-ellipsis">
+                  {book.infoList[0]?.replace(/^标题:/, "") || ""}
+                </View>
                 <View className="a-color-grey text-ellipsis">{book.infoList[1]}</View>
                 <View className="a-color-grey text-ellipsis">{book.infoList[2]}</View>
                 <View className="a-color-grey text-ellipsis">{book.infoList[3]}</View>
