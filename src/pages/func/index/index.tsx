@@ -46,7 +46,7 @@ export default function Func() {
 
       <Layout title="信息" color="rgb(var(--green-5))" inheritColor>
         <View className="y-center">
-          <View className={styles.iconBox} onClick={() => onNav(PATH.TIMETABLE, false)}>
+          <View className={styles.iconBox} onClick={() => onNav(PATH.LIBRARY, false)}>
             <Icon type="lib"></Icon>
             <View className={styles.text}>图书检索</View>
           </View>
