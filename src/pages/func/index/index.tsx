@@ -70,7 +70,7 @@ export default function Func() {
             <Icon type="lubiao-xf"></Icon>
             <View className={styles.text}>迎新专版</View>
           </Navigator>
-          <View className={styles.iconBox} onClick={() => onNav(PATH.TIMETABLE, true)}>
+          <View className={styles.iconBox} onClick={() => onNav(PATH.EXAM, true)}>
             <Icon type="biji-copy"></Icon>
             <View className={styles.text}>考试安排</View>
           </View>
