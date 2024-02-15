@@ -25,7 +25,7 @@ const AppLauncher: FC = ({ children }) => {
     try {
       Report.error(err);
       console.log(err);
-      Toast.info("发生内部错误: \r\n" + err);
+      Toast.info("发生内部错误: \r\n" + String(err).slice(0, 100));
     } catch (e) {
       console.log(e);
     }

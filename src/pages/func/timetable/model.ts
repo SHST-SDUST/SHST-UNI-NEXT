@@ -5,7 +5,7 @@ import { DateTime } from "@/utils/datetime";
 import { HTTP } from "@/utils/request";
 import { LocalStorage } from "@/utils/storage";
 
-type RemoteTableInfo = Array<null | {
+export type RemoteTableInfo = Array<null | {
   jsxm: string;
   jsmc: string;
   jssj: string;

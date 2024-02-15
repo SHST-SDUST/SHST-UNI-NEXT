@@ -37,7 +37,7 @@ export default function Func() {
             <Icon type="grade"></Icon>
             <View className={styles.text}>查成绩</View>
           </View>
-          <View className={styles.iconBox} onClick={() => onNav(PATH.TIMETABLE, true)}>
+          <View className={styles.iconBox} onClick={() => onNav(PATH.SHARE_TABLE, true)}>
             <Icon type="fly"></Icon>
             <View className={styles.text}>共享课表</View>
           </View>
