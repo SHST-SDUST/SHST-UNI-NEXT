@@ -83,7 +83,7 @@ export default function Func() {
             <Icon type="map"></Icon>
             <View className={styles.text}>嵙地图</View>
           </View>
-          <View className={styles.iconBox} onClick={() => onNav(PATH.TIMETABLE, false)}>
+          <View className={styles.iconBox} onClick={() => onNav(PATH.TOUR, false)}>
             <Icon type="nav"></Icon>
             <View className={styles.text}>校园导览</View>
           </View>

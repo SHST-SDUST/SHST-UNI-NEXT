@@ -11,6 +11,7 @@ export const PATH = {
   LIBRARY_DETAIL: "/pages/func/information/library/pages/detail/index",
   EXAM: "/pages/func/information/exam/index",
   MAP: "/pages/func/sdust/map/index",
+  TOUR: "/pages/func/sdust/tour/index",
   PLUS: "/pages/plus/index/index",
   USER: "/pages/user/index/index",
   POST: "/pages/user/post/index",

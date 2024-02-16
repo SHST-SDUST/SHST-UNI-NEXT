@@ -6,12 +6,12 @@ import { Dot } from "@/components/dot";
 import { Layout } from "@/components/layout";
 import { Preview } from "@/utils/preview";
 
-import { MAP_IMG } from "./constant";
+import { DEFAULT_LATITUDE, DEFAULT_LONGITUDE, MAP_IMG } from "./constant";
 import styles from "./index.module.scss";
 
 export default function Index() {
-  const [longitude, setLongitude] = useState(120.12487);
-  const [latitude, setLatitude] = useState(35.9994);
+  const [latitude, setLatitude] = useState(DEFAULT_LATITUDE);
+  const [longitude, setLongitude] = useState(DEFAULT_LONGITUDE);
   const [msg, setMsg] = useState("定位中");
   const [dot, setDot] = useState("#FFB800");
 
@@ -59,7 +59,7 @@ export default function Index() {
             longitude={longitude}
             latitude={latitude}
             enable-building
-            onError={() => null}
+            onError={console.log}
             show-location
             show-scale
           ></Map>
