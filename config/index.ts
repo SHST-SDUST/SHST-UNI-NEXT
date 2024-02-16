@@ -5,7 +5,7 @@ import devConfig from "./dev";
 import prodConfig from "./prod";
 
 // https://taro-docs.jd.com/docs/next/config#defineconfig-辅助函数
-export default defineConfig(async (merge, { command, mode }) => {
+export default defineConfig(async merge => {
   const baseConfig: UserConfigExport = {
     projectName: "SHST-UNI-NEXT",
     date: "2023-11-17",
