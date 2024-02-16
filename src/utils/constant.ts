@@ -10,3 +10,5 @@ export const CACHE = {
   USER: "USER",
   TIMETABLE_WEEK: "TIMETABLE:",
 };
+
+export const REMOTE_STATIC = "http://dev.shst.touchczy.top/public/static/";

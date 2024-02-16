@@ -20,5 +20,6 @@
   ],
   "uniStatistics": {
     "enable": true
-  }
+  },
+  "requiredPrivateInfos": ["getLocation"]
 }

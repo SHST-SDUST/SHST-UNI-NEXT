@@ -47,5 +47,4 @@ export default defineAppConfig({
       desc: "您的位置信息将用于嵙地图定位功能",
     },
   },
-  requiredPrivateInfos: ["getLocation"],
 });
