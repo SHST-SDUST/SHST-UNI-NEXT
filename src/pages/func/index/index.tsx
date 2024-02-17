@@ -87,7 +87,7 @@ export default function Func() {
             <Icon type="nav"></Icon>
             <View className={styles.text}>校园导览</View>
           </View>
-          <View className={styles.iconBox} onClick={() => onNav(PATH.TIMETABLE, false)}>
+          <View className={styles.iconBox} onClick={() => onNav(PATH.CALENDAR, false)}>
             <Icon type="calendar"></Icon>
             <View className={styles.text}>校历</View>
           </View>

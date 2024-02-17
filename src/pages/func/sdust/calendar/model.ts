@@ -14,6 +14,7 @@ export type CalendarData = {
   today?: boolean;
   start?: boolean;
   vacation?: boolean;
+  currentMonth?: boolean;
   // `-1`周次 `0`非本学期 `1`教学 `2`周末 `3`假期
   type: -1 | 0 | 1 | 2 | 3;
 };

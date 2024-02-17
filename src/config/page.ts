@@ -9,6 +9,7 @@ export const PATH = {
   SHARE_TABLE: "/pages/func/study/share-table/index",
   LIBRARY: "/pages/func/information/library/index",
   LIBRARY_DETAIL: "/pages/func/information/library/pages/detail/index",
+  CALENDAR: "/pages/func/sdust/calendar/index",
   EXAM: "/pages/func/information/exam/index",
   MAP: "/pages/func/sdust/map/index",
   TOUR: "/pages/func/sdust/tour/index",
