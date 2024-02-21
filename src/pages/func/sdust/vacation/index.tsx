@@ -4,6 +4,7 @@ import React, { useState } from "react";
 
 import { Banner } from "@/components/banner";
 import { Dot } from "@/components/dot";
+import { Gap } from "@/components/gap";
 import { Layout } from "@/components/layout";
 import { useOnLoadEffect } from "@/hooks/use-onload-effect";
 import { App } from "@/utils/app";
@@ -23,7 +24,7 @@ export default function Index() {
   return (
     <React.Fragment>
       <Banner title="节假日安排"></Banner>
-      <View className="a-lmt"></View>
+      <Gap size={10}></Gap>
       {data.map((item, index) => (
         <Layout key={index}>
           <View className={cs("y-center", styles.line)}>
