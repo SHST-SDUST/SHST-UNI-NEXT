@@ -10,7 +10,7 @@ import { useOnLoadEffect } from "@/hooks/use-onload-effect";
 import { DateTime } from "@/utils/datetime";
 import { Toast } from "@/utils/toast";
 
-import { NOW, TODAY, WEEK_HEADER } from "./constant";
+import { CALENDAR_TYPE, NOW, TODAY, WEEK_HEADER } from "./constant";
 import styles from "./index.module.scss";
 import { type CalendarData, requestForTermData, type TermData } from "./model";
 
@@ -57,25 +57,30 @@ export default function Index() {
         const day = deliver.format("dd");
         if (k === 0) {
           week = deliver.diff(termStartDate).days / 7 + 1;
-          week = week > 0 ? week : 0;
+          week = deliver >= termStartDate ? week : 0;
           inside.push({ day: week, type: -1 });
         }
         const cell: CalendarData = { day, type: 0 };
         if (date === TODAY) cell.today = true;
         if (date === item.startdata) cell.start = true;
-        if (week === item.vacationstart && k === 1) cell.vacation = true;
+        if (week === item.vacationstart && k === 0) cell.vacationStart = true;
         if (deliver.getMonth() === origin.getMonth()) cell.currentMonth = true;
         if (k === 5 || k === 6) {
           cell.type = 2;
+          cell.vacation = true;
         } else if (week && week <= item.weekcount) {
           cell.type = 1;
-          if (week >= item.vacationstart) cell.type = 3;
+          if (week >= item.vacationstart) {
+            cell.type = 3;
+            cell.vacation = true;
+          }
         }
         inside.push(cell);
         deliver.nextDay();
       }
       result.push(inside);
     }
+    console.log("result :>> ", result);
     setCalendar(result);
     setLoaded(true);
   };
@@ -127,21 +132,33 @@ export default function Index() {
         <React.Fragment>
           <Layout>
             <View className="y-center a-flex-space-between">
-              <View className="y-center">
+              <View className={cs("y-center", styles.overview)}>
                 <Icon type="arrow-lift" onClick={() => onSwitchMonth(-1)}></Icon>
-                <View>
+                <View className={cs(styles.current)}>
                   {curYear}年 {curMonth}月
                 </View>
                 <Icon type="arrow-right" onClick={() => onSwitchMonth(1)}></Icon>
               </View>
-              <View className="y-center">
-                <View className="y-center x-center" onClick={() => transformToDate(TODAY)}>
+              <View className={cs("y-center", styles.opContainer)}>
+                <View
+                  className="y-center x-center"
+                  style={{ background: "rgb(var(--blue-6))" }}
+                  onClick={() => transformToDate(TODAY)}
+                >
                   <Label>今</Label>
                 </View>
-                <View className="y-center x-center" onClick={() => transformToDate(termStart)}>
+                <View
+                  className="y-center x-center"
+                  style={{ background: "rgb(var(--orangered-6))" }}
+                  onClick={() => transformToDate(termStart)}
+                >
                   <Label>开</Label>
                 </View>
-                <View className="y-center x-center" onClick={() => transformToDate(vacationStart)}>
+                <View
+                  className="y-center x-center"
+                  style={{ background: "rgb(var(--green-6))" }}
+                  onClick={() => transformToDate(vacationStart)}
+                >
                   <Label>假</Label>
                 </View>
               </View>
@@ -155,7 +172,27 @@ export default function Index() {
               {calendar.map((row, rowIndex) => (
                 <View key={rowIndex} className={styles.line}>
                   {row.map((item, columnIndex) => (
-                    <View key={columnIndex}>{item.day}</View>
+                    <View
+                      key={columnIndex}
+                      className={cs(
+                        styles.day,
+                        item.vacation && styles.vacation,
+                        item.currentMonth && styles.currentMonth,
+                        item.type === -1 && styles.order
+                      )}
+                    >
+                      <View
+                        className={cs(
+                          styles.num,
+                          item.today && styles.today,
+                          item.start && styles.start,
+                          item.vacationStart && styles.vacationStart
+                        )}
+                      >
+                        <Label>{item.day}</Label>
+                      </View>
+                      <View className={styles.type}>{CALENDAR_TYPE[item.type]}</View>
+                    </View>
                   ))}
                 </View>
               ))}
