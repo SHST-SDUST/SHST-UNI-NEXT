@@ -121,3 +121,6 @@ export default function Func() {
     </React.Fragment>
   );
 }
+
+Func.onShareAppMessage = () => void 0;
+Func.onShareTimeline = () => void 0;

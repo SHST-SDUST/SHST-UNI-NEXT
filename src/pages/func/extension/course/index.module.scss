@@ -1,0 +1,19 @@
+.classContainer {
+  color: #aaa;
+}
+
+.className {
+  color: #333;
+  font-size: 15px;
+}
+
+.classRoom {
+  color: $a-blue;
+  font-size: 18px;
+}
+
+.right {
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
