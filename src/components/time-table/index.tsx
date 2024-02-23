@@ -3,6 +3,7 @@ import { cs } from "laser-utils";
 import type { FC } from "react";
 import React, { useMemo, useState } from "react";
 
+import { App } from "@/utils/app";
 import { DateTime } from "@/utils/datetime";
 
 import { Dialog } from "../dialog";
@@ -21,15 +22,16 @@ import { getKey, WEEK_DAY } from "./utils";
 export const TimeTable: FC<{
   className?: string;
   week: number;
-  termStart: string;
+  termStart?: string;
   timeTable: TimeTableType;
 }> = props => {
   const [dialogContent, setDialogContent] = useState<TimeTableItem[] | null>(null);
 
   const dateRow = useMemo(() => {
+    if (!props.termStart) return null;
     const result: DateRowType = [];
     const today = new DateTime().format("MM/dd");
-    const latest = props.termStart ? new DateTime(props.termStart) : new DateTime();
+    const latest = new DateTime(props.termStart);
     latest.nextDay((props.week - 1) * 7 - 1);
     for (let i = 0; i < 7; ++i) {
       latest.nextDay();
@@ -42,10 +44,17 @@ export const TimeTable: FC<{
   const table = useMemo(() => {
     const result: DefinedTableRecord = {};
     for (const item of props.timeTable) {
-      const key = getKey(item.weekDay, item.serial);
-      const record: DefinedTableItem = result[key] || { simple: item, all: [] };
-      if (item.isCurWeek) record.simple = item;
-      record.all.push(item);
+      const node = { ...item };
+      if (!node.background) {
+        const colorList = App.data.colorList;
+        const uniqueNum = node.className.split("").reduce((pre, cur) => pre + cur.charCodeAt(0), 0);
+        const background = colorList[uniqueNum % colorList.length];
+        node.background = background;
+      }
+      const key = getKey(node.weekDay, node.serial);
+      const record: DefinedTableItem = result[key] || { simple: node, all: [] };
+      if (node.isCurWeek) record.simple = node;
+      record.all.push(node);
       result[key] = record;
     }
     return result;
@@ -57,17 +66,21 @@ export const TimeTable: FC<{
 
   return (
     <View className={props.className}>
-      <View className="a-flex">
-        {dateRow.map((item, index) => (
-          <View key={index} className={styles.weekUnit}>
-            <View className={styles.line}>{item.weekDay}</View>
-            <View className={cs(styles.line, styles.border, item.today && styles.active)}>
-              {item.date}
-            </View>
+      {dateRow && (
+        <React.Fragment>
+          <View className="a-flex">
+            {dateRow.map((item, index) => (
+              <View key={index} className={styles.weekUnit}>
+                <View className={styles.line}>{item.weekDay}</View>
+                <View className={cs(styles.line, styles.border, item.today && styles.active)}>
+                  {item.date}
+                </View>
+              </View>
+            ))}
           </View>
-        ))}
-      </View>
-      <Divider margin={3}></Divider>
+          <Divider margin={3}></Divider>
+        </React.Fragment>
+      )}
       {Array(5)
         .fill(0)
         .map((_, rowIndex) => (

@@ -14,6 +14,7 @@ export const PATH = {
   EXAM: "/pages/func/information/exam/index",
   MAP: "/pages/func/sdust/map/index",
   TOUR: "/pages/func/sdust/tour/index",
+  CLASSES: "/pages/func/extension/classes/index",
   PLUS: "/pages/plus/index/index",
   USER: "/pages/user/index/index",
   POST: "/pages/user/post/index",

@@ -100,11 +100,11 @@ export default function Func() {
 
       <Layout title="扩展" color="rgb(var(--arcoblue-5))" inheritColor>
         <View className="y-center">
-          <View className={styles.iconBox} onClick={() => onNav(PATH.TIMETABLE, true)}>
+          <View className={styles.iconBox} onClick={() => onNav(PATH.CLASSES, false)}>
             <Icon type="kebiao1"></Icon>
             <View className={styles.text}>教室课表</View>
           </View>
-          <View className={styles.iconBox} onClick={() => onNav(PATH.TIMETABLE, true)}>
+          <View className={styles.iconBox} onClick={() => onNav(PATH.TIMETABLE, false)}>
             <Icon type="tubiao-"></Icon>
             <View className={styles.text}>蹭课查询</View>
           </View>
