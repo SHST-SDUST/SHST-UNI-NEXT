@@ -14,3 +14,6 @@ export default function Index() {
     </View>
   );
 }
+
+Index.onShareAppMessage = () => void 0;
+Index.onShareTimeline = () => void 0;

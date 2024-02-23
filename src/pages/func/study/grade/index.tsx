@@ -158,3 +158,6 @@ export default function Index() {
     </React.Fragment>
   );
 }
+
+Index.onShareAppMessage = () => void 0;
+Index.onShareTimeline = () => void 0;

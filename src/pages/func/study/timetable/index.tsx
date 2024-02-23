@@ -95,3 +95,6 @@ export default function TimeTablePage() {
     </React.Fragment>
   );
 }
+
+TimeTablePage.onShareAppMessage = () => void 0;
+TimeTablePage.onShareTimeline = () => void 0;
