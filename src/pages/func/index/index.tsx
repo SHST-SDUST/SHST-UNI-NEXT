@@ -104,7 +104,7 @@ export default function Func() {
             <Icon type="kebiao1"></Icon>
             <View className={styles.text}>教室课表</View>
           </View>
-          <View className={styles.iconBox} onClick={() => onNav(PATH.TIMETABLE, false)}>
+          <View className={styles.iconBox} onClick={() => onNav(PATH.COURSE, false)}>
             <Icon type="tubiao-"></Icon>
             <View className={styles.text}>蹭课查询</View>
           </View>

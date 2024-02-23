@@ -7,13 +7,13 @@
 }
 
 .line {
-  background-color: #aaa;
+  background-color: var(--color-border-3);
   height: 1px;
   width: 100px;
 }
 
 .status {
-  color: #aaa;
+  color: var(--color-text-2);
   font-size: 13px;
   padding: 5px;
 }

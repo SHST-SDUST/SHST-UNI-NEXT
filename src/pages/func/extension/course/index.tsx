@@ -1,20 +1,49 @@
 import { Input, View } from "@tarojs/components";
 import { cs } from "laser-utils";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 
 import { Layout } from "@/components/layout";
 import { Loading } from "@/components/loading";
 import { LOADING_STATE } from "@/components/loading/constant";
+import { Toast } from "@/utils/toast";
 
 import styles from "./index.module.scss";
-import type { Course } from "./model";
+import { type Course, requestCourse } from "./model";
 
 export default function Index() {
+  const page = useRef(1);
   const [loaded, setLoaded] = useState(false);
   const [className, setClassName] = useState("");
   const [data, setData] = useState<Course[]>([]);
   const [teacherName, setTeacherName] = useState("");
-  const [loadingType, setLoadingType] = useState(LOADING_STATE.LOADING_MORE);
+  const [loadingType, setLoadingType] = useState<string>(LOADING_STATE.LOADING_MORE);
+
+  const loadCourse = (reset?: boolean) => {
+    if (!className && !teacherName) {
+      Toast.info("请至少输入一个搜索项");
+      return void 0;
+    }
+    setLoadingType(LOADING_STATE.LOADING);
+    requestCourse(page.current, className, teacherName).then(res => {
+      setData(reset ? res : [...data, ...res]);
+      if (res.length < 10) {
+        setLoadingType(LOADING_STATE.NO_MORE);
+      } else {
+        setLoadingType(LOADING_STATE.LOADING_MORE);
+      }
+      setLoaded(true);
+    });
+  };
+
+  const loadNextPage = () => {
+    page.current++;
+    loadCourse();
+  };
+
+  const onConfirm = () => {
+    page.current = 1;
+    loadCourse(true);
+  };
 
   return (
     <React.Fragment>
@@ -37,7 +66,9 @@ export default function Index() {
             placeholder="请输入(可选)"
           />
         </View>
-        <View className="a-btn a-btn-blue a-btn-large x-full">确定</View>
+        <View className="a-btn a-btn-blue a-btn-large x-full" onClick={onConfirm}>
+          确定
+        </View>
       </Layout>
 
       {loaded && (
@@ -65,9 +96,7 @@ export default function Index() {
               </Layout>
             </View>
           ))}
-          <Layout>
-            <Loading state={loadingType} onClick={() => null}></Loading>
-          </Layout>
+          <Loading className={styles.loading} state={loadingType} onClick={loadNextPage}></Loading>
         </View>
       )}
 

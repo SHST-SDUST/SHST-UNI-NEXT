@@ -1,4 +1,5 @@
 import { View } from "@tarojs/components";
+import { cs } from "laser-utils";
 import type { FC } from "react";
 import React, { useMemo } from "react";
 
@@ -8,6 +9,7 @@ import styles from "./index.module.scss";
 export const Loading: FC<{
   state: string;
   onClick: () => void;
+  className?: string;
 }> = props => {
   const status = useMemo(() => {
     switch (props.state) {
@@ -24,9 +26,12 @@ export const Loading: FC<{
 
   return (
     <React.Fragment>
-      <View className={styles.loadContainer} onClick={props.onClick}>
+      <View
+        className={cs(styles.loadContainer, props.className)}
+        onClick={() => props.state === LOADING_STATE.LOADING_MORE && props.onClick()}
+      >
         {props.state !== LOADING_STATE.LOADING && <View className={styles.line}></View>}
-        {props.state !== LOADING_STATE.LOADING && (
+        {props.state === LOADING_STATE.LOADING && (
           <View>
             <View className={styles.loader}></View>
           </View>
