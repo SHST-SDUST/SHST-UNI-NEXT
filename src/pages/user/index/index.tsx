@@ -85,7 +85,12 @@ export default function Index() {
           <Icon type="arrow-right"></Icon>
         </View>
       </View>
-      <View className={cs("a-btn a-btn-orange a-btn-large", styles.btnFull)}>注销</View>
+      <View
+        className={cs("a-btn a-btn-orange a-btn-large", styles.btnFull)}
+        onClick={() => Nav.to(PATH.LOGIN)}
+      >
+        注销
+      </View>
     </Layout>
   );
 }

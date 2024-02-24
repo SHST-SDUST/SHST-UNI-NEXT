@@ -1,6 +1,8 @@
 export const PATH = {
   HOME: "/pages/index/index/index",
   LOGIN: "/pages/app/login/index",
+  NOT_FOUNT: "/pages/app/404/index",
+  WEBVIEW: "/pages/app/webview/index",
   FUNC: "/pages/func/index/index",
   TIMETABLE: "/pages/func/study/timetable/index",
   TIMETABLE_EDITOR: "/pages/func/study/timetable/pages/editor/index",
@@ -24,6 +26,4 @@ export const PATH = {
   ABOUT: "/pages/user/about/index",
   REWARD: "/pages/user/reward/index",
   REWARD_LIST: "/pages/user/reward/pages/list/index",
-  NOT_FOUNT: "/pages/app/404/index",
-  WEBVIEW: "/pages/app/webview/index",
 };

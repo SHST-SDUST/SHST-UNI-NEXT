@@ -17,6 +17,7 @@ export default function Index() {
   const [loading, setLoading] = useState<string>(LOADING_STATE.LOADING_MORE);
 
   const loadRewardList = () => {
+    setLoading(LOADING_STATE.LOADING);
     requestForRewardList(page.current).then(res => {
       setData([...data, ...res]);
       setLoading(res.length < 10 ? LOADING_STATE.NO_MORE : LOADING_STATE.LOADING_MORE);

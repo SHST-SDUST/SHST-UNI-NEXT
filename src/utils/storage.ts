@@ -46,7 +46,7 @@ export const LocalStorage = {
   setSync: function <T = string>(originKey: string, data: T, expire = null): void {
     return this.set(originKey, data, expire);
   },
-  getPromise: function <T = string>(originKey: string): Promise<T | null> {
+  getPromise: function <T = unknown>(originKey: string): Promise<T | null> {
     const key = convertKey(originKey);
     return new Promise<T | null>(resolve => {
       Taro.getStorage({
