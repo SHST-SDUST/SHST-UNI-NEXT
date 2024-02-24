@@ -7,4 +7,7 @@ export const RegExec = {
     while ((temp = regex.exec(s))) result.push(temp && temp[1] ? temp[1] : temp[0]);
     return result;
   },
+  get: (from: string[] | null, index: number) => {
+    return from ? from[index] || "" : "";
+  },
 };

@@ -112,7 +112,7 @@ export default function Func() {
             <Icon type="link"></Icon>
             <View className={styles.text}>常用链接</View>
           </View>
-          <View className={styles.iconBox} onClick={() => onNav(PATH.TIMETABLE, true)}>
+          <View className={styles.iconBox} onClick={() => onNav(PATH.CARD, true)}>
             <Icon type="xuehao"></Icon>
             <View className={styles.text}>校园卡</View>
           </View>
