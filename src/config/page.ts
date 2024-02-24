@@ -16,6 +16,7 @@ export const PATH = {
   TOUR: "/pages/func/sdust/tour/index",
   CLASSES: "/pages/func/extension/classes/index",
   COURSE: "/pages/func/extension/course/index",
+  LINK: "/pages/func/extension/link/index",
   PLUS: "/pages/plus/index/index",
   USER: "/pages/user/index/index",
   POST: "/pages/user/post/index",

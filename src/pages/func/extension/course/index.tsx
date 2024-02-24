@@ -8,7 +8,7 @@ import { LOADING_STATE } from "@/components/loading/constant";
 import { Toast } from "@/utils/toast";
 
 import styles from "./index.module.scss";
-import { type Course, requestCourse } from "./model";
+import { type Course, requestForCourse } from "./model";
 
 export default function Index() {
   const page = useRef(1);
@@ -24,7 +24,7 @@ export default function Index() {
       return void 0;
     }
     setLoadingType(LOADING_STATE.LOADING);
-    requestCourse(page.current, className, teacherName).then(res => {
+    requestForCourse(page.current, className, teacherName).then(res => {
       setData(reset ? res : [...data, ...res]);
       if (res.length < 10) {
         setLoadingType(LOADING_STATE.NO_MORE);

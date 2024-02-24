@@ -16,7 +16,7 @@ export type Course = {
   turn_index: number;
 };
 
-export const requestCourse = (page: number, className?: string, teacher?: string) => {
+export const requestForCourse = (page: number, className?: string, teacher?: string) => {
   const data: Record<string, string> = {};
   className && (data.classname = className);
   teacher && (data.teacher = teacher);
