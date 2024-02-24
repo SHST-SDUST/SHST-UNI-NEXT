@@ -64,7 +64,7 @@ export const App = {
         /* DOT */
         const notify = response.initData.tips;
         App.data.point = notify;
-        const point = LocalStorage.get("point");
+        const point = LocalStorage.get(CACHE.ANNOUNCE_INDEX);
         if (point !== notify) Taro.showTabBarRedDot({ index: 3 }).catch(() => void 0);
 
         /* Openid */

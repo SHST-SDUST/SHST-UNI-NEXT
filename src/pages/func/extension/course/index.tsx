@@ -96,7 +96,7 @@ export default function Index() {
               </Layout>
             </View>
           ))}
-          <Loading className={styles.loading} state={loadingType} onClick={loadNextPage}></Loading>
+          <Loading className={styles.loading} state={loadingType} onNext={loadNextPage}></Loading>
         </View>
       )}
 

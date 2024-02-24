@@ -1,0 +1,23 @@
+.info {
+  align-items: center;
+  display: flex;
+  font-size: 13px;
+  justify-content: space-between;
+  line-height: 23px;
+}
+
+.name {
+  font-size: 15px;
+}
+
+.time {
+  color: #aaa;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.amount {
+  color: rgb(var(--arcoblue-6));
+  font-size: 17px;
+  margin-right: 5px;
+}

@@ -8,8 +8,9 @@ import styles from "./index.module.scss";
 
 export const Loading: FC<{
   state: string;
-  onClick: () => void;
+  onNext: () => void;
   className?: string;
+  block?: boolean;
 }> = props => {
   const status = useMemo(() => {
     switch (props.state) {
@@ -27,8 +28,8 @@ export const Loading: FC<{
   return (
     <React.Fragment>
       <View
-        className={cs(styles.loadContainer, props.className)}
-        onClick={() => props.state === LOADING_STATE.LOADING_MORE && props.onClick()}
+        className={cs(styles.loadContainer, props.block && styles.block, props.className)}
+        onClick={() => props.state === LOADING_STATE.LOADING_MORE && props.onNext()}
       >
         {props.state !== LOADING_STATE.LOADING && <View className={styles.line}></View>}
         {props.state === LOADING_STATE.LOADING && (

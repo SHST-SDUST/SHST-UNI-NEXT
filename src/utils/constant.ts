@@ -13,4 +13,4 @@ export const CACHE = {
   USER_INFO: "USER_INFO",
 };
 
-export const REMOTE_STATIC = "http://dev.shst.touchczy.top/public/static/";
+export const REMOTE_STATIC = DEV_HOST + "/public/static/";
