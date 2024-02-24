@@ -21,6 +21,7 @@ export const PATH = {
   PLUS: "/pages/plus/index/index",
   USER: "/pages/user/index/index",
   POST: "/pages/user/post/index",
+  ABOUT: "/pages/user/about/index",
   NOT_FOUNT: "/pages/app/404/index",
   WEBVIEW: "/pages/app/webview/index",
 };

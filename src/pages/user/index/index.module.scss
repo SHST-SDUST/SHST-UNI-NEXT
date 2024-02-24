@@ -8,12 +8,12 @@
   padding: 10px;
 
   > .top {
-    border-top: 1px solid #eee;
+    border-top: 1px solid var(--color-border-2);
   }
 }
 
 .line {
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--color-border-2);
   display: flex;
   height: 30px;
   justify-content: space-between;

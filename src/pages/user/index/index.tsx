@@ -80,7 +80,7 @@ export default function Index() {
           <View>赞赏</View>
           <Icon type="arrow-right"></Icon>
         </View>
-        <View className={styles.line}>
+        <View className={styles.line} onClick={() => Nav.to(PATH.ABOUT)}>
           <View>关于</View>
           <Icon type="arrow-right"></Icon>
         </View>
