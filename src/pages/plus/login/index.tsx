@@ -44,8 +44,8 @@ export default function Index() {
       if (res.status === 1) {
         LocalStorage.clearPromise().then(() => {
           LocalStorage.setPromise(CACHE.USER, { account, password });
-          App.data.isSHSTLogin = true;
-          Nav.launch(PATH.HOME);
+          App.data.isPLUSLogin = true;
+          Nav.back();
         });
       } else if (res.status === 2) {
         Toast.info(res.msg);

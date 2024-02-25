@@ -30,7 +30,7 @@ export default defineAppConfig({
         iconPath: "./static/plus.png",
         selectedIconPath: "./static/plus-active.png",
         pagePath: PATH.PLUS.slice(1),
-        text: "强智",
+        text: "Plus",
       },
       {
         iconPath: "./static/user.png",
