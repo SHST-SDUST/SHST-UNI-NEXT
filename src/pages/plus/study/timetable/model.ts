@@ -22,7 +22,7 @@ export const parseTimeTable = (data: RemoteTableInfo, week?: number): TimeTableT
   const timeTable: Array<TimeTableItem> = [];
   const curWeek = week || App.data.curWeek;
   const colorList = App.data.colorList;
-  const judgeCurWeekTable = (weeks: string[]) => {
+  const checkIsCurrentWeek = (weeks: string[]) => {
     const decideCurWeek = (str: string): boolean => {
       const [start, end] = str.split("-").map(v => Number(v) >> 0);
       for (let i = start; i <= end; ++i) {
@@ -56,7 +56,7 @@ export const parseTimeTable = (data: RemoteTableInfo, week?: number): TimeTableT
       teacher: value.teacher,
       ext: value.weeks_raw,
       background: "#CCC",
-      isCurWeek: judgeCurWeekTable(value.weeks),
+      isCurWeek: checkIsCurrentWeek(value.weeks),
     };
     if (item.isCurWeek) {
       const uniqueNum = value.name.split("").reduce((pre, cur) => pre + cur.charCodeAt(0), 0);
