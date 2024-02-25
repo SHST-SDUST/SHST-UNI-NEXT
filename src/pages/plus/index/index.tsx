@@ -39,7 +39,7 @@ export default function Func() {
             <Icon type="grade"></Icon>
             <View className={styles.text}>查成绩</View>
           </View>
-          <View className={styles.iconBox} onClick={() => onNav(PATH.TIMETABLE, true)}>
+          <View className={styles.iconBox} onClick={() => onNav(PATH.PLUS_EXAM, true)}>
             <Icon type="biji-copy"></Icon>
             <View className={styles.text}>考试安排</View>
           </View>

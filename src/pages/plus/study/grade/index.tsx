@@ -8,6 +8,7 @@ import { Dot } from "@/components/dot";
 import { Layout } from "@/components/layout";
 import { useOnLoadEffect } from "@/hooks/use-onload-effect";
 import { App } from "@/utils/app";
+import { generateTerms } from "@/utils/terms";
 import { Toast } from "@/utils/toast";
 
 import styles from "./index.module.scss";
@@ -23,18 +24,7 @@ export default function Index() {
   const [terms, setTerms] = useState<QueryTerms>(INIT_QUERY_TERMS);
 
   const initQueryTerms = () => {
-    const year = parseInt(App.data.curTerm.split("-")[1]);
-    const group: QueryTerms = [{ show: "全部学期", value: "" }];
-    for (let i = 1; i <= 4; ++i) {
-      const firstTerm = year - i + "-" + (year - i + 1) + "-2";
-      const secondTerm = year - i + "-" + (year - i + 1) + "-1";
-      if (firstTerm <= App.data.curTerm) {
-        group.push({ show: firstTerm, value: firstTerm });
-      }
-      if (secondTerm <= App.data.curTerm) {
-        group.push({ show: secondTerm, value: secondTerm });
-      }
-    }
+    const group: QueryTerms = [{ show: "全部学期", value: "" }, ...generateTerms()];
     setTerms(group);
   };
 
