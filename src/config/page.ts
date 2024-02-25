@@ -24,6 +24,7 @@ export const PATH = {
   PLUS_LOGIN: "/pages/plus/login/index",
   PLUS_TIMETABLE: "/pages/plus/study/timetable/index",
   PLUS_CLASSROOM: "/pages/plus/study/classroom/index",
+  PLUS_GRADE: "/pages/plus/study/grade/index",
   USER: "/pages/user/index/index",
   POST: "/pages/user/post/index",
   ABOUT: "/pages/user/about/index",
