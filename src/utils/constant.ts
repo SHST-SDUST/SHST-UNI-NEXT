@@ -11,6 +11,7 @@ export const CACHE = {
   TIMETABLE_WEEK: "TIMETABLE:",
   ANNOUNCE_INDEX: "ANNOUNCE_INDEX",
   USER_INFO: "USER_INFO",
+  PLUS_TABLE: "PLUS_TABLE",
 };
 
 export const REMOTE_STATIC = DEV_HOST + "/public/static/";

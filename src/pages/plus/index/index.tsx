@@ -27,7 +27,7 @@ export default function Func() {
     <React.Fragment>
       <Layout title="学习" color="rgb(var(--red-5))" inheritColor>
         <View className="y-center">
-          <View className={styles.iconBox} onClick={() => onNav(PATH.TIMETABLE, true)}>
+          <View className={styles.iconBox} onClick={() => onNav(PATH.PLUS_TIMETABLE, true)}>
             <Icon type="kebiao"></Icon>
             <View className={styles.text}>查课表</View>
           </View>

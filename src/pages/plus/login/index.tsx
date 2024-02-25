@@ -65,7 +65,6 @@ export default function Index() {
   };
 
   useOnLoadEffect(() => {
-    App.data.isSHSTLogin = false;
     loadVerifyCode();
     LocalStorage.getPromise<{ account: string; password: string }>(CACHE.USER).then(res => {
       if (res && res.account && res.password) {

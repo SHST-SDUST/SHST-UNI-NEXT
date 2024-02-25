@@ -26,7 +26,7 @@ export default function TimeTablePage() {
   const getTimeTable = (currentWeek: number, cache = true, throttle = false) => {
     requestTimeTable(currentWeek, cache, throttle).then(res => {
       if (res) {
-        const list = parseTimeTable(res.data);
+        const list = parseTimeTable(res.info, currentWeek);
         setTable(list);
       } else {
         Toast.info("加载失败，请刷新重试");

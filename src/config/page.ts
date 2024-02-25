@@ -22,6 +22,7 @@ export const PATH = {
   CARD: "/pages/func/extension/card/index",
   PLUS: "/pages/plus/index/index",
   PLUS_LOGIN: "/pages/plus/login/index",
+  PLUS_TIMETABLE: "/pages/plus/study/timetable/index",
   USER: "/pages/user/index/index",
   POST: "/pages/user/post/index",
   ABOUT: "/pages/user/about/index",

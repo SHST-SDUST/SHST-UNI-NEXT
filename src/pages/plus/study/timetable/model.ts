@@ -1,54 +1,70 @@
 import type { TimeTableItem, TimeTableType } from "@/components/time-table/types";
 import { App } from "@/utils/app";
 import { CACHE } from "@/utils/constant";
-import { DateTime } from "@/utils/datetime";
 import { HTTP } from "@/utils/request";
 import { LocalStorage } from "@/utils/storage";
 
-export type RemoteTableInfo = Array<null | {
-  jsxm: string;
-  jsmc: string;
-  jssj: string;
-  kssj: string;
-  kkzc: string;
-  kcsj: string;
-  kcmc: string;
-  sjbz: number;
+export type RemoteTableInfo = Array<{
+  day: number;
+  serial: number;
+  name: string;
+  weeks: string[];
+  teacher: string;
+  weeks_raw: string;
+  classroom: string;
 }>;
 
-export type RemoteTable = { data: RemoteTableInfo; status: number; week: number };
+export type RemoteTable = { info: RemoteTableInfo; status: number; week: number };
 export type TableData = Omit<RemoteTable, "status">;
 export type TableCache = { data: RemoteTableInfo; term: string };
 
-export const parseTimeTable = (data: RemoteTableInfo, today = false): TimeTableType => {
+export const parseTimeTable = (data: RemoteTableInfo, week?: number): TimeTableType => {
   const timeTable: Array<TimeTableItem> = [];
-  let todayWeekDay = new DateTime().getDay() - 1;
-  if (todayWeekDay === -1) todayWeekDay = 6; // 周日
+  const curWeek = week || App.data.curWeek;
   const colorList = App.data.colorList;
-  for (const value of data) {
-    if (!value) continue;
-    const day = Number(value.kcsj[0]) - 1;
-    if (today && day !== todayWeekDay) continue;
-    const serialGroup = value.kcsj
-      .slice(1)
-      .replace(/(\d{4})/g, "$1,")
-      .split(",");
-    serialGroup.forEach(v => {
-      if (!v) return void 0;
-      const serial = Number(v.slice(1, 2)) >> 1;
-      const className = value.kcmc.split("（")[0];
-      const uniqueNum = className.split("").reduce((pre, cur) => pre + cur.charCodeAt(0), 0);
+  const judgeCurWeekTable = (weeks: string[]) => {
+    const decideCurWeek = (str: string): boolean => {
+      const [start, end] = str.split("-").map(v => Number(v) >> 0);
+      for (let i = start; i <= end; ++i) {
+        if (curWeek === i) return true;
+      }
+      return false;
+    };
+    for (let i = 0, n = weeks.length; i < n; ++i) {
+      const str = weeks[i];
+      if (/^\d+-\d+$/.test(str)) {
+        if (decideCurWeek(str)) return true;
+      } else if (/^\d+-\d+\/[12]$/.test(str)) {
+        const type = Number(str.slice(-1));
+        if (type % 2 !== curWeek % 2) continue;
+        if (decideCurWeek(str.replace(/\/\d/, ""))) return true;
+      } else if (/^\d+$/.test(str)) {
+        if (Number(str) >> 0 === curWeek) return true;
+      }
+    }
+    return false;
+  };
+  data.forEach(value => {
+    if (!value) return void 0;
+    const day = value.day;
+    const serial = value.serial;
+    const item: TimeTableItem = {
+      weekDay: day,
+      serial,
+      className: value.name,
+      classRoom: value.classroom,
+      teacher: value.teacher,
+      ext: value.weeks_raw,
+      background: "#CCC",
+      isCurWeek: judgeCurWeekTable(value.weeks),
+    };
+    if (item.isCurWeek) {
+      const uniqueNum = value.name.split("").reduce((pre, cur) => pre + cur.charCodeAt(0), 0);
       const background = colorList[uniqueNum % colorList.length];
-      timeTable.push({
-        serial,
-        weekDay: day,
-        className,
-        background,
-        classRoom: value.jsmc,
-        teacher: value.jsxm,
-      });
-    });
-  }
+      item.background = background;
+    }
+    timeTable.push(item);
+  });
   return timeTable;
 };
 
@@ -63,7 +79,7 @@ export const requestRemoteTimeTable = (
   return HTTP.request<RemoteTable>({
     load: 2,
     throttle: throttle,
-    url: App.data.url + "/sw/table" + urlTemp,
+    url: App.data.url + "/plus/table" + urlTemp,
     data: {
       week: App.data.curWeek,
       term: App.data.curTerm,
@@ -71,11 +87,11 @@ export const requestRemoteTimeTable = (
   }).then(res => {
     if (res.data.status === 1) {
       const data = res.data;
-      const table = data.data.filter(Boolean);
-      const key = CACHE.TIMETABLE_WEEK + res.data.week;
+      const table = data.info.filter(Boolean);
+      const key = CACHE.PLUS_TABLE;
       const cache: TableCache = { data: table, term: App.data.curTerm };
       LocalStorage.setPromise(key, cache);
-      return { data: table, week: res.data.week };
+      return { info: table, week: res.data.week };
     } else {
       return null;
     }
@@ -87,12 +103,12 @@ export const requestTimeTable = (
   cache = true,
   throttle = false
 ): Promise<TableData | null> => {
-  const key = CACHE.TIMETABLE_WEEK + week;
+  const key = CACHE.PLUS_TABLE;
   if (!cache) return requestRemoteTimeTable(week, throttle);
   return LocalStorage.getPromise<TableCache>(key).then(data => {
     if (data && data.term === App.data.curTerm) {
       console.log("GET TABLE FROM CACHE WEEK", week);
-      return { data: data.data, week: week };
+      return { info: data.data, week: week };
     } else {
       return requestRemoteTimeTable(week, throttle);
     }
