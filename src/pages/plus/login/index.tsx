@@ -13,11 +13,13 @@ import { LocalStorage } from "@/utils/storage";
 import { Toast } from "@/utils/toast";
 
 import styles from "./index.module.scss";
-import { loginApp } from "./model";
+import { loginApp, requestForVerifyCode } from "./model";
 
 export default function Index() {
   const [account, setAccount] = useState("");
   const [password, setPassword] = useState("");
+  const [code, setCode] = useState("");
+  const [base64Code, setBase64Code] = useState("");
   const [status, setStatus] = useState("");
   const [resetApp, setResetApp] = useState(false);
   const [hidePassword, setHidePassword] = useState(true);
@@ -36,17 +38,15 @@ export default function Index() {
   };
 
   const login = () => {
-    if (account.length == 0 || password.length == 0) {
-      Toast.info("用户名和密码不能为空");
+    if (account.length == 0 || password.length == 0 || code.length == 0) {
+      Toast.info("用户名/密码/验证码不能为空");
       return void 0;
     }
-    loginApp(account, password).then(res => {
+    loginApp(account, password, code).then(res => {
       if (res.status === 1) {
-        LocalStorage.clearPromise().then(() => {
-          LocalStorage.setPromise(CACHE.USER, { account, password });
-          App.data.isPLUSLogin = true;
-          Nav.back();
-        });
+        LocalStorage.setPromise(CACHE.USER, { account, password });
+        App.data.isPLUSLogin = true;
+        Nav.back();
       } else if (res.status === 2) {
         Toast.info(res.msg);
         setStatus(res.msg);
@@ -57,8 +57,16 @@ export default function Index() {
     });
   };
 
+  const loadVerifyCode = () => {
+    requestForVerifyCode().then(res => {
+      setBase64Code(res.data.img);
+      setCode(res.data.code);
+    });
+  };
+
   useOnLoadEffect(() => {
     App.data.isSHSTLogin = false;
+    loadVerifyCode();
     LocalStorage.getPromise<{ account: string; password: string }>(CACHE.USER).then(res => {
       if (res && res.account && res.password) {
         setAccount(res.account);
@@ -97,6 +105,27 @@ export default function Index() {
               password={hidePassword}
             />
             <Switch onChange={() => setHidePassword(!hidePassword)}></Switch>
+          </View>
+          <View className={cs("y-center x-full a-lmt", styles.inputView)}>
+            <Icon type="tupian" className={styles.inputViewIcon}></Icon>
+            <Input
+              value={code}
+              onInput={e => setCode(e.detail.value)}
+              className="a-input x-full"
+              name="code"
+              placeholder="验证码"
+            />
+            {base64Code === "refresh" ? (
+              <View className={cs(styles.verifyCode, "x-center y-center")} onClick={loadVerifyCode}>
+                <View className="a-color-grey a-fontsize-11">点击刷新</View>
+              </View>
+            ) : (
+              <Image
+                src={"data:image/jpg;base64," + base64Code}
+                className={styles.verifyCode}
+                onClick={loadVerifyCode}
+              ></Image>
+            )}
           </View>
         </View>
         <View className="a-flex a-lmt">

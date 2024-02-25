@@ -6,15 +6,22 @@ export type LoginResponse = {
   msg: string;
 };
 
-export const loginApp = (account: string, password: string) => {
+export const loginApp = (account: string, password: string, code: string) => {
   return HTTP.request<LoginResponse>({
-    url: App.data.url + "/auth/login/1",
+    url: App.data.url + "/plus/login/1",
     method: "POST",
     throttle: true,
     data: {
       account: account,
       password: encodeURIComponent(password),
+      code: code,
       openid: App.data.openid,
     },
   }).then(res => res.data);
+};
+
+export const requestForVerifyCode = () => {
+  return HTTP.request<{ img: string; code: string }>({
+    url: App.data.url + "/plus/getVerifyCode",
+  });
 };
