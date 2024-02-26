@@ -7,14 +7,14 @@ import { Layout } from "@/components/layout";
 import { useOnLoadEffect } from "@/hooks/use-onload-effect";
 
 import type { PlanItem } from "./model";
-import { requestForExam } from "./model";
+import { requestForPlan } from "./model";
 
 export default function Index() {
   const [tips, setTips] = useState<string>("");
   const [list, setList] = useState<PlanItem[]>([]);
 
   useOnLoadEffect(() => {
-    requestForExam().then(res => {
+    requestForPlan().then(res => {
       setTips(res.length !== 0 ? "" : "暂无执行计划信息");
       setList(res.length !== 0 ? res.filter(Boolean) : []);
     });

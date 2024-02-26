@@ -27,6 +27,7 @@ export const PATH = {
   PLUS_GRADE: "/pages/plus/study/grade/index",
   PLUS_EXAM: "/pages/plus/study/exam/index",
   PLUS_PLAN: "/pages/plus/information/plan/index",
+  PLUS_SITUATION: "/pages/plus/information/situation/index",
   USER: "/pages/user/index/index",
   POST: "/pages/user/post/index",
   ABOUT: "/pages/user/about/index",

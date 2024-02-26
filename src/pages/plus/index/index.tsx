@@ -52,7 +52,7 @@ export default function Func() {
             <Icon type="jihua"></Icon>
             <View className={styles.text}>执行计划</View>
           </View>
-          <View className={styles.iconBox} onClick={() => onNav(PATH.TIMETABLE, true)}>
+          <View className={styles.iconBox} onClick={() => onNav(PATH.PLUS_SITUATION, true)}>
             <Icon type="mc-wcqk"></Icon>
             <View className={styles.text}>完成情况</View>
           </View>

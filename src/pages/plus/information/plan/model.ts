@@ -12,7 +12,7 @@ export type PlanItem = {
   unit: string;
 };
 
-export const requestForExam = () => {
+export const requestForPlan = () => {
   return HTTP.request<{ info: PlanItem[] }>({
     load: 3,
     url: App.data.url + "/plus/complyPlan",
