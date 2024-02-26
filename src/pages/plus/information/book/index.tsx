@@ -7,45 +7,55 @@ import { Dot } from "@/components/dot";
 import { Gap } from "@/components/gap";
 import { Layout } from "@/components/layout";
 import { useOnLoadEffect } from "@/hooks/use-onload-effect";
+import { useStateRef } from "@/hooks/use-state-ref";
 import { App } from "@/utils/app";
 import { generateTerms } from "@/utils/terms";
 import { Toast } from "@/utils/toast";
 
 import styles from "./index.module.scss";
-import { type ExamType, INIT_QUERY_TERMS, type QueryTerms, requestForExam } from "./model";
+import type { BookItem, QueryTerms } from "./model";
+import { INIT_QUERY_TERMS, requestForBook } from "./model";
 
 export default function Index() {
   const [tips, setTips] = useState("");
   const [text, setText] = useState("");
   const [index, setIndex] = useState<number>(0);
-  const [data, setData] = useState<ExamType[]>([]);
-  const [terms, setTerms] = useState<QueryTerms>(INIT_QUERY_TERMS);
+  const [data, setData] = useState<BookItem[]>([]);
+  const [terms, setTerms, termsRef] = useStateRef<QueryTerms>(INIT_QUERY_TERMS);
 
   const initQueryTerms = () => {
-    const group: QueryTerms = [...generateTerms()];
+    let [start, end, type] = App.data.curTerm.split("-").map(v => Number(v));
+    if (type === 1) {
+      type = 2;
+    } else {
+      type = 1;
+      ++start;
+      ++end;
+    }
+    const group: QueryTerms = [...generateTerms(end + 1, `${start}-${end}-${type}`)];
     setTerms(group);
   };
 
   const loadRemoteExam = (term: string) => {
     setText(term);
-    requestForExam(term).then(res => {
+    requestForBook(term).then(res => {
       if (!res) {
         Toast.info("加载失败，请重试");
         return void 0;
       }
       if (res.length) {
-        setTips("");
         setData(res);
+        setTips("");
       } else {
-        setTips("暂无考试信息");
         setData([]);
+        setTips("暂无教材信息");
       }
     });
   };
 
   useOnLoadEffect(() => {
     initQueryTerms();
-    loadRemoteExam(App.data.curTerm);
+    loadRemoteExam(termsRef.current[0]?.value || App.data.curTerm);
   });
 
   const onPickChange: CommonEventFunction<PickerSelectorProps.ChangeEventDetail> = e => {
@@ -56,7 +66,7 @@ export default function Index() {
 
   return (
     <React.Fragment>
-      <Layout title="考试查询">
+      <Layout title="教材查询">
         <View className={styles.selector}>
           <View>请选择学期</View>
           <Picker
@@ -84,16 +94,22 @@ export default function Index() {
       {data.map((item, key) => (
         <Layout key={key}>
           <View className="y-center a-fontsize-15">
-            <Dot name={item.name}></Dot>
-            <View className="text-ellipsis">{item.name}</View>
+            <Dot name={item.book_name}></Dot>
+            <View className="text-ellipsis">{item.book_name}</View>
           </View>
           <View className="y-center a-fontsize-12 a-lmt a-color-grey">
-            <View className="text-ellipsis">课程代码: {item.no}</View>
-            <View className="a-lml">教室: {item.classroom}</View>
-            <View className="a-lml">位置: {item.location || "无"}</View>
+            <View>ISBN: {item.isbn}</View>
+            <View className="a-lml">课程代码: {item.no}</View>
           </View>
           <View className="y-center a-fontsize-12 a-lmt a-color-grey">
-            <View>{item.time}</View>
+            <View>作者: {item.author || "无"}</View>
+            <View className="a-lml">出版社: {item.publisher || "无"}</View>
+            <View className="a-lml">出版时间: {item.publish_time || "无"}</View>
+          </View>
+          <View className="y-center a-fontsize-12 a-lmt a-color-grey">
+            <View>课程: {item.classname || "无"}</View>
+            <View className="a-lml">类型: {item.type || "无"}</View>
+            <View className="a-lml">班级订购: {item.nums}</View>
           </View>
         </Layout>
       ))}
