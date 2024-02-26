@@ -25,18 +25,18 @@ export default function Func() {
 
   return (
     <React.Fragment>
-      <Layout title="学习" color="rgb(var(--red-5))" inheritColor>
+      <Layout title="学习" color="rgb(var(--arcoblue-5))" inheritColor>
         <View className="y-center">
           <View className={styles.iconBox} onClick={() => onNav(PATH.PLUS_TIMETABLE, true)}>
-            <Icon type="kebiao"></Icon>
+            <Icon type="kebiao-copy"></Icon>
             <View className={styles.text}>查课表</View>
           </View>
           <View className={styles.iconBox} onClick={() => onNav(PATH.PLUS_CLASSROOM, true)}>
-            <Icon type="classroom"></Icon>
+            <Icon type="jiaoshi"></Icon>
             <View className={styles.text}>查教室</View>
           </View>
           <View className={styles.iconBox} onClick={() => onNav(PATH.PLUS_GRADE, true)}>
-            <Icon type="grade"></Icon>
+            <Icon type="chengji-"></Icon>
             <View className={styles.text}>查成绩</View>
           </View>
           <View className={styles.iconBox} onClick={() => onNav(PATH.PLUS_EXAM, true)}>
@@ -46,9 +46,9 @@ export default function Func() {
         </View>
       </Layout>
 
-      <Layout title="信息" color="rgb(var(--green-5))" inheritColor>
+      <Layout title="信息" color="rgb(var(--purple-5))" inheritColor>
         <View className="y-center">
-          <View className={styles.iconBox} onClick={() => onNav(PATH.TIMETABLE, false)}>
+          <View className={styles.iconBox} onClick={() => onNav(PATH.PLUS_PLAN, false)}>
             <Icon type="jihua"></Icon>
             <View className={styles.text}>执行计划</View>
           </View>
