@@ -33,6 +33,7 @@ export default function Index() {
       if (res) {
         const list = parseTimeTable(res.data, true);
         if (!list.length) {
+          setTable([]);
           setTips("No Class Today");
           setTipsContent("今天没有课，快去自习室学习吧");
         } else {
