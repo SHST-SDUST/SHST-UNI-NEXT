@@ -124,7 +124,6 @@ export default function Index() {
             </View>
             <View className="x-center y-center a-flex-none a-ml-10 a-mr-10">
               <Icon type="arrow-right"></Icon>
-              <View className="iconfont icon-arrow-right a-flex-none a-fontsize-18 a-color-grey"></View>
             </View>
           </View>
         </Layout>
