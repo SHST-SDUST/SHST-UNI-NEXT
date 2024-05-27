@@ -8,7 +8,7 @@ import { Layout } from "@/components/layout";
 import { useOnLoadEffect } from "@/hooks/use-onload-effect";
 import { App } from "@/utils/app";
 import { Clipboard } from "@/utils/clipboard";
-import { CACHE, PATH } from "@/utils/constant";
+import { CACHE, EXPLORATION, PATH, TODAY } from "@/utils/constant";
 import { Nav } from "@/utils/nav";
 import { LocalStorage } from "@/utils/storage";
 
@@ -76,10 +76,12 @@ export default function Index() {
           </View>
           <Icon type="arrow-right"></Icon>
         </View>
-        <View className={styles.line} onClick={() => Nav.to(PATH.REWARD)}>
-          <View>赞赏</View>
-          <Icon type="arrow-right"></Icon>
-        </View>
+        {TODAY > EXPLORATION && (
+          <View className={styles.line} onClick={() => Nav.to(PATH.REWARD)}>
+            <View>赞赏</View>
+            <Icon type="arrow-right"></Icon>
+          </View>
+        )}
         <View className={styles.line} onClick={() => Nav.to(PATH.ABOUT)}>
           <View>关于</View>
           <Icon type="arrow-right"></Icon>

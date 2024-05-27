@@ -46,7 +46,7 @@ export const globalAppData: Data = {
   isSHSTLogin: false,
   isPLUSLogin: false,
   initData: {},
-  version: "3.6.1",
+  version: "3.6.2",
   project: "山科小站",
   curTerm: "2019-2020-1",
   curTermStart: "2019-08-26",

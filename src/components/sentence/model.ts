@@ -1,3 +1,4 @@
+import { App } from "@/utils/app";
 import { CACHE } from "@/utils/constant";
 import { DateTime } from "@/utils/datetime";
 import { HTTP } from "@/utils/request";
@@ -17,17 +18,16 @@ export const requestOneSentence = (): Promise<SentenceType | null> => {
     })
     .then(cache => {
       if (cache) return Promise.resolve(cache);
-      return HTTP.request<unknown>({
-        url: "https://sentence.iciba.com/api/sentence/list?limit=1",
+      return HTTP.request<{ data: SentenceType }>({
+        url: App.data.url + "/ultra/sentence",
         cookie: false,
       }).then(res => {
-        if (res.statusCode === 200) {
-          // @ts-expect-error TODO: 标注类型
-          const data = res.data.data.sentenceViewList[0].dailysentence;
+        if (res.statusCode === 200 && res.data && res.data.data.note) {
+          const data = res.data.data;
           return {
             note: data.note,
             content: data.content,
-            image: data.picture2,
+            image: data.image,
           };
         } else {
           return LocalStorage.getPromise<SentenceType>(CACHE.SENTENCE_LONG);
