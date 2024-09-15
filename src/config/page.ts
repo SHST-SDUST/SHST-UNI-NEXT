@@ -34,4 +34,4 @@ export const PATH = {
   ABOUT: "/pages/user/about/index",
   REWARD: "/pages/user/reward/index",
   REWARD_LIST: "/pages/user/reward/pages/list/index",
-};
+} as const;

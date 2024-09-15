@@ -61,7 +61,7 @@ export default function Index() {
   useOnLoadEffect(onInit);
 
   const bindSHST = () => {
-    !App.data.isSHSTLogin && Nav.webview(PATH.LOGIN);
+    !App.data.isSHSTLogin && Nav.to(PATH.LOGIN);
   };
 
   useEffect(() => {
