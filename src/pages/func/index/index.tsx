@@ -29,11 +29,11 @@ export default function Func() {
             <Icon type="kebiao"></Icon>
             <View className={styles.text}>查课表</View>
           </View>
-          <View className={styles.iconBox} onClick={() => onNav(PATH.CLASSROOM, true)}>
+          <View className={styles.iconBox} onClick={() => onNav(PATH.PLUS_CLASSROOM, true)}>
             <Icon type="classroom"></Icon>
             <View className={styles.text}>查教室</View>
           </View>
-          <View className={styles.iconBox} onClick={() => onNav(PATH.GRADE, true)}>
+          <View className={styles.iconBox} onClick={() => onNav(PATH.PLUS_GRADE, true)}>
             <Icon type="grade"></Icon>
             <View className={styles.text}>查成绩</View>
           </View>
@@ -70,7 +70,7 @@ export default function Func() {
             <Icon type="lubiao-xf"></Icon>
             <View className={styles.text}>迎新专版</View>
           </Navigator>
-          <View className={styles.iconBox} onClick={() => onNav(PATH.EXAM, true)}>
+          <View className={styles.iconBox} onClick={() => onNav(PATH.PLUS_EXAM, true)}>
             <Icon type="biji-copy"></Icon>
             <View className={styles.text}>考试安排</View>
           </View>

@@ -48,7 +48,7 @@ export default function Func() {
 
       <Layout title="信息" color="rgb(var(--purple-5))" inheritColor>
         <View className="y-center">
-          <View className={styles.iconBox} onClick={() => onNav(PATH.PLUS_PLAN, false)}>
+          <View className={styles.iconBox} onClick={() => onNav(PATH.PLUS_PLAN, true)}>
             <Icon type="jihua"></Icon>
             <View className={styles.text}>执行计划</View>
           </View>

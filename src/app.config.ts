@@ -26,12 +26,12 @@ export default defineAppConfig({
         pagePath: PATH.FUNC.slice(1),
         text: "功能",
       },
-      // {
-      //   iconPath: "./static/plus.png",
-      //   selectedIconPath: "./static/plus-active.png",
-      //   pagePath: PATH.PLUS.slice(1),
-      //   text: "Plus",
-      // },
+      {
+        iconPath: "./static/plus.png",
+        selectedIconPath: "./static/plus-active.png",
+        pagePath: PATH.PLUS.slice(1),
+        text: "Plus",
+      },
       {
         iconPath: "./static/user.png",
         selectedIconPath: "./static/user-active.png",

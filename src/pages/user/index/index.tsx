@@ -1,14 +1,16 @@
 import { Image, View } from "@tarojs/components";
 import Taro from "@tarojs/taro";
 import { cs } from "laser-utils";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { Icon } from "@/components/icon";
 import { Layout } from "@/components/layout";
+import { useMemoFn } from "@/hooks/use-memoized-fn";
 import { useOnLoadEffect } from "@/hooks/use-onload-effect";
 import { App } from "@/utils/app";
 import { Clipboard } from "@/utils/clipboard";
 import { CACHE, EXPLORATION, PATH, TODAY } from "@/utils/constant";
+import { Event } from "@/utils/event";
 import { Nav } from "@/utils/nav";
 import { LocalStorage } from "@/utils/storage";
 
@@ -22,16 +24,7 @@ export default function Index() {
   const [account, setAccount] = useState(" ");
   const [academy, setAcademy] = useState(" ");
 
-  useOnLoadEffect(() => {
-    LocalStorage.getPromise(CACHE.ANNOUNCE_INDEX).then(res => {
-      if (res !== App.data.point) setPoint("block");
-    });
-    if (!App.data.isSHSTLogin) {
-      setName(TOUR_NAME);
-      setAccount(TOUR_NAME);
-      setAcademy(TOUR_NAME);
-      return void 0;
-    }
+  const setUserInfo = useMemoFn(() => {
     requestForUserInfo().then(res => {
       if (res) {
         setName(res.name);
@@ -40,6 +33,26 @@ export default function Index() {
       }
     });
   });
+
+  useOnLoadEffect(() => {
+    LocalStorage.getPromise(CACHE.ANNOUNCE_INDEX).then(res => {
+      if (res !== App.data.point) setPoint("block");
+    });
+    if (!App.data.isPLUSLogin) {
+      setName(TOUR_NAME);
+      setAccount(TOUR_NAME);
+      setAcademy(TOUR_NAME);
+      return void 0;
+    }
+    setUserInfo();
+  });
+
+  useEffect(() => {
+    Event.on(Event.TYPE.PLUS_LOGIN, setUserInfo);
+    return () => {
+      Event.off(Event.TYPE.PLUS_LOGIN, setUserInfo);
+    };
+  }, [setUserInfo]);
 
   const onGoToAnnounce = () => {
     setPoint("none");

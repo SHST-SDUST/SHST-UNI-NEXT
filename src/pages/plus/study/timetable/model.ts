@@ -1,3 +1,5 @@
+import { DateTime } from "laser-utils";
+
 import type { TimeTableItem, TimeTableType } from "@/components/time-table/types";
 import { App } from "@/utils/app";
 import { CACHE } from "@/utils/constant";
@@ -18,7 +20,11 @@ export type RemoteTable = { info: RemoteTableInfo; status: number; week: number 
 export type TableData = Omit<RemoteTable, "status">;
 export type TableCache = { data: RemoteTableInfo; term: string };
 
-export const parseTimeTable = (data: RemoteTableInfo, week?: number): TimeTableType => {
+export const parseTimeTable = (
+  data: RemoteTableInfo,
+  week?: number,
+  today?: boolean
+): TimeTableType => {
   const timeTable: Array<TimeTableItem> = [];
   const curWeek = week || App.data.curWeek;
   const colorList = App.data.colorList;
@@ -44,10 +50,14 @@ export const parseTimeTable = (data: RemoteTableInfo, week?: number): TimeTableT
     }
     return false;
   };
+  const currentDay = (new DateTime().getDay() || 7) - 1;
   data.forEach(value => {
     if (!value) return void 0;
     const day = value.day;
     const serial = value.serial;
+    if (today && day !== currentDay) {
+      return void 0;
+    }
     const item: TimeTableItem = {
       weekDay: day,
       serial,
@@ -58,6 +68,9 @@ export const parseTimeTable = (data: RemoteTableInfo, week?: number): TimeTableT
       background: "#CCC",
       isCurWeek: checkIsCurrentWeek(value.weeks),
     };
+    if (today && !item.isCurWeek) {
+      return void 0;
+    }
     if (item.isCurWeek) {
       const uniqueNum = value.name.split("").reduce((pre, cur) => pre + cur.charCodeAt(0), 0);
       const background = colorList[uniqueNum % colorList.length];
@@ -72,7 +85,7 @@ export const requestRemoteTimeTable = (
   week: number,
   throttle = false
 ): Promise<TableData | null> => {
-  if (!App.data.isSHSTLogin) return Promise.resolve(null);
+  if (!App.data.isPLUSLogin) return Promise.resolve(null);
   console.log("GET TABLE FROM REMOTE WEEK", week);
   let urlTemp = "";
   if (typeof week === "number") urlTemp += "/" + week;

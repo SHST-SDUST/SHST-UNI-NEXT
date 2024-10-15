@@ -44,6 +44,10 @@ export default function Index() {
     }
     loginApp(account, password, code).then(res => {
       LocalStorage.setPromise(CACHE.PLUS_LAST_LOGGED_IN, false);
+      const prevUser = LocalStorage.get<{ account: string }>(CACHE.USER);
+      if (prevUser && prevUser.account !== account) {
+        LocalStorage.clearSync();
+      }
       if (res.status === 1) {
         LocalStorage.setPromise(CACHE.PLUS_LAST_LOGGED_IN, true);
         LocalStorage.setPromise(CACHE.USER, { account, password });

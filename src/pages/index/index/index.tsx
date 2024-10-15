@@ -10,7 +10,7 @@ import type { TimeTableType } from "@/components/time-table/types";
 import { Weather } from "@/components/weather";
 import { PATH } from "@/config/page";
 import { useOnLoadEffect } from "@/hooks/use-onload-effect";
-import { parseTimeTable } from "@/pages/func/study/timetable/model";
+import { parseTimeTable } from "@/pages/plus/study/timetable/model";
 import { App } from "@/utils/app";
 import { Event, EVENT_ENUM } from "@/utils/event";
 import { Nav } from "@/utils/nav";
@@ -31,7 +31,7 @@ export default function Index() {
   const getTimeTable = (cache = true, load = 1, throttle = false) => {
     requestTimeTable(cache, load, throttle).then(res => {
       if (res) {
-        const list = parseTimeTable(res.data, true);
+        const list = parseTimeTable(res.info, App.data.curWeek, true);
         if (!list.length) {
           setTable([]);
           setTips("No Course Today");
@@ -52,7 +52,7 @@ export default function Index() {
     setSwiper(App.data.initData.ads);
     setPost(App.data.initData.articalName);
     setPostUrl(App.data.initData.articleUrl);
-    if (!App.data.isSHSTLogin) {
+    if (!App.data.isPLUSLogin) {
       setTips("点我前去绑定教务系统账号");
       setTipsContent("绑定强智教务系统就可以使用山科小站咯");
     }
@@ -61,7 +61,7 @@ export default function Index() {
   useOnLoadEffect(onInit);
 
   const bindSHST = () => {
-    !App.data.isSHSTLogin && Nav.to(PATH.PLUS_LOGIN);
+    !App.data.isPLUSLogin && Nav.to(PATH.PLUS_LOGIN);
   };
 
   useEffect(() => {
