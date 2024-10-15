@@ -6,16 +6,13 @@ import { Layout } from "@/components/layout";
 import { PATH } from "@/config/page";
 import { App } from "@/utils/app";
 import { Nav } from "@/utils/nav";
-import { Toast } from "@/utils/toast";
 
 import styles from "./index.module.scss";
 
 export default function Func() {
   const onNav = (url: string, check?: boolean) => {
     if (check && !App.data.isPLUSLogin) {
-      Toast.confirm("提示", "该功能需要绑定强智教务系统，是否前去绑定").then(res => {
-        res && Nav.to(PATH.PLUS_LOGIN);
-      });
+      Nav.to(PATH.PLUS_LOGIN);
     } else {
       Nav.to(url);
     }
