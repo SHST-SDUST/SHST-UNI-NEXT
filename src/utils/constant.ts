@@ -11,6 +11,7 @@ export const CACHE = {
   ANNOUNCE_INDEX: "ANNOUNCE_INDEX",
   USER_INFO: "USER_INFO",
   PLUS_TABLE: "PLUS_TABLE",
+  PLUS_LAST_LOGGED_IN: "PLUS_LAST_LOGGED_IN",
 };
 
 export const DEV_HOST = "http://dev.shst.touchczy.top";

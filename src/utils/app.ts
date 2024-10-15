@@ -1,7 +1,7 @@
 import Taro from "@tarojs/taro";
 import { isArray, TSON } from "laser-utils";
 
-import { CACHE } from "./constant";
+import { CACHE, PATH } from "./constant";
 import { Event, EVENT_ENUM } from "./event";
 import type { InitDataType } from "./global";
 import { globalAppData } from "./global";
@@ -14,24 +14,20 @@ import { Toast } from "./toast";
 export const App = {
   data: globalAppData,
   init: () => {
-    Loading.start({ load: 3, title: "加载中" });
+    Loading.start({ load: 3, title: "初始化中..." });
     return Taro.login()
       .then(({ errMsg, code }) => {
         if (!code) return Promise.reject(errMsg);
-        const userInfo = LocalStorage.get(CACHE.USER) || {};
-        interface InitRemoteRequest {
+        interface InitResponse {
           status: number;
           openid: string;
           initData: InitDataType;
         }
-        return HTTP.request<InitRemoteRequest>({
+        return HTTP.request<InitResponse>({
           load: 0,
-          url: App.data.url + "/auth/wx",
+          url: App.data.url + "/auth/wxPlus",
           method: "POST",
-          data: {
-            code,
-            user: JSON.stringify(userInfo),
-          },
+          data: { code },
         });
       })
       .then(res => {
@@ -57,9 +53,9 @@ export const App = {
         }
 
         /* 用户使用信息  `1`已注册用户  `2`未注册用户*/
-        if (response.status === 1) App.data.isSHSTLogin = true;
+        // if (response.status === 1) App.data.isSHSTLogin = true;
         App.data.isInitialized = true;
-        console.log("Status:", App.data.isSHSTLogin ? "User Login" : "New user");
+        // console.log("Status:", App.data.isSHSTLogin ? "User Login" : "New user");
 
         /* DOT */
         const notify = response.initData.tips;
@@ -92,9 +88,6 @@ export const App = {
         /* resolve */
         return Promise.resolve();
       })
-      .then(() => {
-        Event.commit(EVENT_ENUM.ON_LOADED, null);
-      })
       .catch((err: Error) => {
         console.log(err);
         Toast.modal(
@@ -105,8 +98,45 @@ export const App = {
           App.init();
         });
       })
-      .finally(() => {
+      .then(() => {
         Loading.end({ load: 3 });
+        const lastLoggedIn = LocalStorage.get<boolean>(CACHE.PLUS_LAST_LOGGED_IN);
+        const userInfo = LocalStorage.get<{ account: string; password: string }>(CACHE.USER);
+        // 自动登录 1. 上次登录成功 2.存在用户信息缓存
+        if (lastLoggedIn && userInfo && userInfo.account) {
+          Loading.start({ load: 3, title: "自动登录中..." });
+          interface LoginResponse {
+            status: number;
+            msg: string;
+          }
+          const loginType = process.env.TARO_ENV === "weapp" ? 1 : 2;
+          return HTTP.request<LoginResponse>({
+            load: 0,
+            url: App.data.url + "/plus/autoLogin/" + loginType,
+            method: "POST",
+            data: {
+              account: userInfo.account,
+              password: encodeURIComponent(userInfo.password),
+            },
+          }).then(res => {
+            if (res.data.status !== 1) {
+              Toast.info("自动登录失败: " + res.data.msg, 1000).then(() => {
+                Nav.to(PATH.PLUS_LOGIN);
+              });
+              LocalStorage.setPromise(CACHE.PLUS_LAST_LOGGED_IN, false);
+            }
+            if (res.data.status === 1) {
+              // PLUS 自动登录成功
+              App.data.isPLUSLogin = true;
+              LocalStorage.setPromise(CACHE.PLUS_LAST_LOGGED_IN, true);
+            }
+          });
+        }
+        return Promise.resolve();
+      })
+      .then(() => {
+        Loading.end({ load: 3 });
+        Event.commit(EVENT_ENUM.ON_LOADED, null);
       });
   },
   onload: (func: () => void) => {

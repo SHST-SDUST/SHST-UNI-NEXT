@@ -43,7 +43,9 @@ export default function Index() {
       return void 0;
     }
     loginApp(account, password, code).then(res => {
+      LocalStorage.setPromise(CACHE.PLUS_LAST_LOGGED_IN, false);
       if (res.status === 1) {
+        LocalStorage.setPromise(CACHE.PLUS_LAST_LOGGED_IN, true);
         LocalStorage.setPromise(CACHE.USER, { account, password });
         App.data.isPLUSLogin = true;
         Nav.back();

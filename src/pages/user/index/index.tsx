@@ -89,7 +89,7 @@ export default function Index() {
       </View>
       <View
         className={cs("a-btn a-btn-orange a-btn-large", styles.btnFull)}
-        onClick={() => Nav.to(PATH.LOGIN)}
+        onClick={() => Nav.to(PATH.PLUS_LOGIN)}
       >
         注销
       </View>

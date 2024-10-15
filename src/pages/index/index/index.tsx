@@ -34,7 +34,7 @@ export default function Index() {
         const list = parseTimeTable(res.data, true);
         if (!list.length) {
           setTable([]);
-          setTips("No Class Today");
+          setTips("No Course Today");
           setTipsContent("今天没有课，快去自习室学习吧");
         } else {
           setTips("");
@@ -61,13 +61,15 @@ export default function Index() {
   useOnLoadEffect(onInit);
 
   const bindSHST = () => {
-    !App.data.isSHSTLogin && Nav.to(PATH.LOGIN);
+    !App.data.isSHSTLogin && Nav.to(PATH.PLUS_LOGIN);
   };
 
   useEffect(() => {
     const handler = () => getTimeTable(false, 2, true);
+    Event.on(EVENT_ENUM.PLUS_LOGIN, handler);
     Event.on(EVENT_ENUM.REFRESH_TIMETABLE, handler);
     return () => {
+      Event.off(EVENT_ENUM.PLUS_LOGIN, handler);
       Event.off(EVENT_ENUM.REFRESH_TIMETABLE, handler);
     };
   }, []);

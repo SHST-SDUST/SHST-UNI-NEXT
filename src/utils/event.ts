@@ -1,7 +1,7 @@
 import type { Keys } from "laser-utils";
 import { EventBus as AbstractEventBus } from "laser-utils";
 
-const EVENT_TYPE = ["ON_LOADED", "REFRESH_TIMETABLE"] as const;
+const EVENT_TYPE = ["ON_LOADED", "REFRESH_TIMETABLE", "PLUS_LOGIN"] as const;
 
 export const EVENT_ENUM = EVENT_TYPE.reduce(
   (acc, cur) => ({ ...acc, [cur]: `__${cur}__` }),
@@ -11,6 +11,7 @@ export const EVENT_ENUM = EVENT_TYPE.reduce(
 interface EventBusParams {
   [EVENT_ENUM.ON_LOADED]: null;
   [EVENT_ENUM.REFRESH_TIMETABLE]: null;
+  [EVENT_ENUM.PLUS_LOGIN]: null;
 }
 
 declare module "laser-utils" {

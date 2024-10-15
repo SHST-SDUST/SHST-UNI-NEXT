@@ -12,9 +12,9 @@ import styles from "./index.module.scss";
 
 export default function Func() {
   const onNav = (url: string, check?: boolean) => {
-    if (check && !App.data.isSHSTLogin) {
+    if (check && !App.data.isPLUSLogin) {
       Toast.confirm("提示", "该功能需要绑定强智教务系统，是否前去绑定").then(res => {
-        res && Nav.to(PATH.LOGIN);
+        res && Nav.to(PATH.PLUS_LOGIN);
       });
     } else {
       Nav.to(url);
@@ -25,7 +25,7 @@ export default function Func() {
     <React.Fragment>
       <Layout title="学习" color="rgb(var(--red-5))" inheritColor>
         <View className="y-center">
-          <View className={styles.iconBox} onClick={() => onNav(PATH.TIMETABLE, true)}>
+          <View className={styles.iconBox} onClick={() => onNav(PATH.PLUS_TIMETABLE, true)}>
             <Icon type="kebiao"></Icon>
             <View className={styles.text}>查课表</View>
           </View>
