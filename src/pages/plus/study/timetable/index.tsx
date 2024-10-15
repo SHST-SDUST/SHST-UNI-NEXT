@@ -59,7 +59,7 @@ export default function TimeTablePage() {
   };
 
   const onRefresh = useMemoizedFn(() => {
-    getTimeTable(week, false, true);
+    getTimeTable(week, false, false);
   });
 
   useEffect(() => {

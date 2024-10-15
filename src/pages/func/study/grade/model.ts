@@ -24,7 +24,7 @@ export const requestForGrade = (term: string): Promise<GradeType[] | null> => {
     url: App.data.url + "/sw/grade" + query,
   }).then(res => {
     const data = res.data.data;
-    if (!data[0]) return [];
+    if (!data || !data[0]) return [];
     if (res.data.data) return res.data.data;
     return null;
   });

@@ -4,6 +4,8 @@ import { Toast } from "@/utils/toast";
 
 import type { RemoteTableInfo } from "../timetable/model";
 
+/** 1.默认状态 2.发起请求 3.拒绝 0.成功 */
+
 export type Response = {
   user: string;
   status: number;
