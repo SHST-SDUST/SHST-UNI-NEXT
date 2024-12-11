@@ -20,6 +20,11 @@ type SuccessCallbackOptions = Parameters<Required<RequestOptions>["success"]>["0
 export type RequestOptionsAllNeeded = NoUndefinedField<RequestInfo>;
 export interface RequestInfo {
   title?: string;
+  /**
+   * - 1 Nav Loading
+   * - 2 Nav Loading + Title
+   * - 3 Mask Loading
+   */
   load?: number;
   url: string;
   method?: Parameters<typeof Taro.request>[0]["method"];
@@ -71,7 +76,7 @@ export const xhr = (requestInfo: RequestInfo): void => {
         if (res.statusCode === 200) {
           if (
             typeof res.data === "object" &&
-            !(res.data instanceof ArrayBuffer) &&
+            res.data instanceof ArrayBuffer === false &&
             res.data.status
           ) {
             if (res.data.status === -1 && res.data.msg) {

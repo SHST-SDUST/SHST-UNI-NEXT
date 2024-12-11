@@ -6,15 +6,16 @@ import { Layout } from "@/components/layout";
 import { TimeTable } from "@/components/time-table";
 import type { TimeTableType } from "@/components/time-table/types";
 import { useOnLoadEffect } from "@/hooks/use-onload-effect";
+import { parseTimeTable } from "@/pages/plus/study/timetable/model";
 import { App } from "@/utils/app";
 import { Toast } from "@/utils/toast";
 
-import { parseTimeTable } from "../timetable/model";
 import styles from "./index.module.scss";
 import {
   agreePeerRequest,
   cancelPeerRequest,
   liftingPeerRequest,
+  refreshTimeTable,
   refusePeerRequest,
   requestForShareTable,
   type Response,
@@ -24,7 +25,6 @@ import {
 export default function Index() {
   const [status, setStatus] = useState(-1);
   const [account, setAccount] = useState("");
-  const [peerName, setPeerName] = useState("");
   const [data, setData] = useState<Response>();
   const [table, setTable] = useState<TimeTableType>([]);
   const [week, setWeek] = useState(1);
@@ -44,6 +44,7 @@ export default function Index() {
         setWeek(App.data.curWeek);
         setTermStart(App.data.curTermStart);
         setTable(timeTable);
+        refreshTimeTable();
       }
       setData(res);
       setStatus(res.status);
@@ -52,11 +53,11 @@ export default function Index() {
   useOnLoadEffect(getData);
 
   const onStartPeerRequest = () => {
-    if (account === "" || peerName === "") {
+    if (account === "") {
       Toast.info("请输入完整信息");
       return void 0;
     }
-    startPeerRequest(account, peerName).then(getData);
+    startPeerRequest(account).then(getData);
   };
 
   const onCancelPeerRequest = () => {
@@ -78,6 +79,7 @@ export default function Index() {
   return (
     <View className={styles.container}>
       <Layout title="共享课表">
+        {/* 1 默认状态 */}
         {status === 1 && (
           <View className="x-center a-flex-warp">
             <View className="x-center a-flex-column">
@@ -88,18 +90,13 @@ export default function Index() {
                 placeholder="对方学号"
                 type="number"
               />
-              <Input
-                value={peerName}
-                onInput={e => setPeerName(e.detail.value)}
-                className="a-input a-mt"
-                placeholder="对方姓名"
-              />
               <View className="a-btn a-btn-blue a-btn-large" onClick={onStartPeerRequest}>
                 发起请求
               </View>
             </View>
           </View>
         )}
+        {/* 2 发起请求状态 */}
         {status === 2 && data && data.pair_user && (
           <View className="x-center a-flex-warp">
             <View className="y-center">
@@ -111,13 +108,14 @@ export default function Index() {
             </View>
           </View>
         )}
+        {/* 0 成功状态 */}
         {status !== 0 && <Divider margin={3}></Divider>}
+        {/* !0 非成功状态 */}
         {status !== 0 && data && data.data && (
           <View className="x-center a-flex-warp">
             {data.data.map((item, key) => (
               <View key={key} className="y-center">
                 <View>{item.account}</View>
-                <View className="a-ml">{item.name}</View>
                 <View
                   className="a-btn a-btn-blue a-btn-small"
                   onClick={() => onAgreePeerRequest(item.id)}
@@ -153,7 +151,10 @@ export default function Index() {
       {status === 1 && (
         <Layout title="Tips">
           <View className="tips-con">
-            1.向对方发起请求(对方必须是正常登录过小程序才可以)，对方通过后，你们将能够在此看到自己与对方的课表
+            1.向对方发起请求，对方通过后，你们将能够在此看到自己与对方的课表
+          </View>
+          <View className="tips-con">
+            2.双方必须要在建立联系后打开过共享课表，并再次刷新后才可以看到对方的课表
           </View>
         </Layout>
       )}

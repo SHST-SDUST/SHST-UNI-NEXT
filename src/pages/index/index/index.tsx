@@ -42,6 +42,9 @@ export default function Index() {
           setTable(list);
         }
       } else {
+        if (!App.data.isPLUSLogin) {
+          return void 0;
+        }
         setTips("加载失败");
         setTipsContent("加载失败了，重新登录试一下");
       }
@@ -55,6 +58,7 @@ export default function Index() {
     if (!App.data.isPLUSLogin) {
       setTips("点我前去绑定教务系统账号");
       setTipsContent("绑定强智教务系统就可以使用山科小站咯");
+      return void 0;
     }
     getTimeTable();
   };
@@ -65,12 +69,13 @@ export default function Index() {
   };
 
   useEffect(() => {
-    const handler = () => getTimeTable(false, 2, true);
-    Event.on(EVENT_ENUM.PLUS_LOGIN, handler);
-    Event.on(EVENT_ENUM.REFRESH_TIMETABLE, handler);
+    const loginHandler = () => getTimeTable(false, 2, false);
+    const refreshHandler = () => getTimeTable(false, 2, true);
+    Event.on(EVENT_ENUM.PLUS_LOGIN, loginHandler);
+    Event.on(EVENT_ENUM.REFRESH_TIMETABLE, refreshHandler);
     return () => {
-      Event.off(EVENT_ENUM.PLUS_LOGIN, handler);
-      Event.off(EVENT_ENUM.REFRESH_TIMETABLE, handler);
+      Event.off(EVENT_ENUM.PLUS_LOGIN, loginHandler);
+      Event.off(EVENT_ENUM.REFRESH_TIMETABLE, refreshHandler);
     };
   }, []);
 

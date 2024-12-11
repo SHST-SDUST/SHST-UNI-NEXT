@@ -5,6 +5,11 @@ import { globalAppData } from "./global";
 type Options = { load: number; title?: string };
 
 export const Loading = {
+  /**
+   * 1 - Nav Loading
+   * 2 - Nav Loading + Title
+   * 3 - Mask Loading
+   */
   start: (options: Options) => {
     switch (options.load) {
       case 1:
@@ -24,6 +29,11 @@ export const Loading = {
         break;
     }
   },
+  /**
+   * 1 - Nav Loading
+   * 2 - Nav Loading + Title
+   * 3 - Mask Loading
+   */
   end: (options: Options) => {
     switch (options.load) {
       case 1:

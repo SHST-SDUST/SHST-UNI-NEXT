@@ -15,8 +15,8 @@ export const requestForUserInfo = (): Promise<UserInfo | null> => {
     if (res && res.account) return res;
     return HTTP.request<{ info: UserInfo }>({
       load: 1,
-      throttle: true,
-      url: App.data.url + "/sw/userInfo",
+      throttle: false,
+      url: App.data.url + "/plus/userInfo",
     }).then(data => {
       if (!data || !data.data) {
         Toast.info("服务器错误");

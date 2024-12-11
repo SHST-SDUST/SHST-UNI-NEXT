@@ -8,6 +8,7 @@ import { useOnLoadEffect } from "@/hooks/use-onload-effect";
 import { LOGO } from "@/pages/user/index/constant";
 import { App } from "@/utils/app";
 import { CACHE } from "@/utils/constant";
+import { Event, EVENT_ENUM } from "@/utils/event";
 import { Nav } from "@/utils/nav";
 import { LocalStorage } from "@/utils/storage";
 import { Toast } from "@/utils/toast";
@@ -52,6 +53,7 @@ export default function Index() {
         LocalStorage.setPromise(CACHE.PLUS_LAST_LOGGED_IN, true);
         LocalStorage.setPromise(CACHE.USER, { account, password });
         App.data.isPLUSLogin = true;
+        Event.emit(EVENT_ENUM.PLUS_LOGIN, null);
         Nav.back();
       } else if (res.status === 2) {
         Toast.info(res.msg);

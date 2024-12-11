@@ -129,6 +129,7 @@ export const App = {
               // PLUS 自动登录成功
               App.data.isPLUSLogin = true;
               LocalStorage.setPromise(CACHE.PLUS_LAST_LOGGED_IN, true);
+              Event.emit(EVENT_ENUM.PLUS_LOGIN, null);
             }
           });
         }
