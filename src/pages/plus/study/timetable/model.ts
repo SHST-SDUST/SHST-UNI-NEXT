@@ -46,6 +46,9 @@ export const parseTimeTable = (
         if (decideCurWeek(str.replace(/\/\d/, ""))) return true;
       } else if (/^\d+$/.test(str)) {
         if (Number(str) >> 0 === curWeek) return true;
+      } else if (/^\d+\/[12]$/.test(str)) {
+        const sliceWeek = Number(str.slice(0, -2)) >> 0;
+        if (sliceWeek === curWeek) return true;
       }
     }
     return false;
