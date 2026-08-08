@@ -16,7 +16,6 @@ export const PATH = {
   COURSE: "/pages/func/extension/course/index",
   LINK: "/pages/func/extension/link/index",
   CARD: "/pages/func/extension/card/index",
-  PLUS: "/pages/plus/index/index",
   PLUS_LOGIN: "/pages/plus/login/index",
   PLUS_TIMETABLE: "/pages/plus/study/timetable/index",
   PLUS_CLASSROOM: "/pages/plus/study/classroom/index",
