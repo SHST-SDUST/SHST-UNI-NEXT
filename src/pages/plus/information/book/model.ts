@@ -4,14 +4,14 @@ import { HTTP } from "@/utils/request";
 export type QueryTerms = { show: string; value: string }[];
 
 export type BookItem = {
-  book_name: string;
+  bookName: string;
   no: string;
   isbn: string;
   publisher: string;
-  publish_time: string;
-  classname: string;
+  publishTime: string;
+  className: string;
   type: string;
-  nums: string;
+  count: string;
   author: string;
 };
 

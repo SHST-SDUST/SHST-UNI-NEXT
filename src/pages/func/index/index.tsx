@@ -67,9 +67,36 @@ export default function Func() {
             <Icon type="lubiao-xf"></Icon>
             <View className={styles.text}>迎新专版</View>
           </Navigator>
+          <Navigator
+            className={styles.iconBox}
+            target="miniProgram"
+            app-id="wx387c0e87230e4cc9"
+            hover-class="none"
+            version="release"
+          >
+            <Icon type="nav"></Icon>
+            <View className={styles.text}>小站Ultra</View>
+          </Navigator>
+        </View>
+      </Layout>
+
+      <Layout title="计划" color="rgb(var(--orangered-6))" inheritColor>
+        <View className="y-center">
+          <View className={styles.iconBox} onClick={() => onNav(PATH.PLUS_PLAN, true)}>
+            <Icon type="calendar"></Icon>
+            <View className={styles.text}>执行计划</View>
+          </View>
+          <View className={styles.iconBox} onClick={() => onNav(PATH.PLUS_SITUATION, true)}>
+            <Icon type="mc-wcqk"></Icon>
+            <View className={styles.text}>完成情况</View>
+          </View>
           <View className={styles.iconBox} onClick={() => onNav(PATH.PLUS_EXAM, true)}>
             <Icon type="biji-copy"></Icon>
             <View className={styles.text}>考试安排</View>
+          </View>
+          <View className={styles.iconBox} onClick={() => onNav(PATH.PLUS_BOOK, true)}>
+            <Icon type="jiaofu-1"></Icon>
+            <View className={styles.text}>教材信息</View>
           </View>
         </View>
       </Layout>
