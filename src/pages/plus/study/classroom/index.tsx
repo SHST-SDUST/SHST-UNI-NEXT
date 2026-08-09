@@ -23,6 +23,7 @@ export default function Index() {
 
   const onSearch = () => {
     Loading.start({ load: 2 });
+    setRooms(null);
     setTimeout(() => {
       const [campusIndex, dataIndex] = index;
       const campus = QUERY_CAMPUS[campusIndex][1];
@@ -71,7 +72,7 @@ export default function Index() {
       {rooms && (
         <Layout title={`${prefix}-[${suffix}]`}>
           <View className={styles.row}>
-            <View className={styles.classRoom}></View>
+            <View className={styles.classRoom}>教室名称</View>
             <View className={styles.cell}>0102</View>
             <View className={styles.cell}>0304</View>
             <View className={styles.cell}>0506</View>
@@ -83,7 +84,7 @@ export default function Index() {
               <View className={styles.classRoom}>{item.room}</View>
               {item.date.slice(0, 5).map((placed, key2) => (
                 <View className={styles.cell} key={key2}>
-                  <Dot background={placed ? "rgb(var(--red-6))" : "rgb(var(--green-6))"} />
+                  <Dot background={placed ? "rgb(var(--red-5))" : "rgb(var(--green-5))"} />
                 </View>
               ))}
             </View>

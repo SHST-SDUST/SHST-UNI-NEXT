@@ -29,6 +29,23 @@ export const requestForClassRoom = (campus: string, date: string) => {
       Toast.info(data.msg || "加载失败，请重试");
       return null;
     }
-    return data as ClassItem[];
+    const rooms = data as ClassItem[];
+    const exclude = [
+      "实验室",
+      "活动教室",
+      "电教室",
+      "乒乓球馆",
+      "体育场",
+      "计算机房",
+      "专用教室",
+      "物理实验室",
+      "田径场",
+      "足球场",
+      "篮排馆",
+      "网球场",
+      "健身房",
+      "制图室",
+    ];
+    return rooms.filter(item => exclude.indexOf(item.type) === -1);
   });
 };

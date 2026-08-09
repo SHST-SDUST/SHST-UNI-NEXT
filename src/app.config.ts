@@ -21,8 +21,8 @@ export default defineAppConfig({
         text: "首页",
       },
       {
-        iconPath: "./static/plus.png",
-        selectedIconPath: "./static/plus-active.png",
+        iconPath: "./static/func.png",
+        selectedIconPath: "./static/func-active.png",
         pagePath: PATH.FUNC.slice(1),
         text: "功能",
       },
