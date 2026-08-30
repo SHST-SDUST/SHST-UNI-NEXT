@@ -29,6 +29,8 @@ export default function Index() {
   const [tipsContent, setTipsContent] = useState("数据加载中");
 
   const getTimeTable = (cache = true, load = 1, throttle = false) => {
+    setTips("数据加载中");
+    setTipsContent("数据加载中...");
     requestTimeTable(cache, load, throttle).then(res => {
       if (res) {
         const list = parseTimeTable(res.info, App.data.curWeek, true);
@@ -69,7 +71,7 @@ export default function Index() {
   };
 
   useEffect(() => {
-    const loginHandler = () => getTimeTable(false, 2, false);
+    const loginHandler = () => getTimeTable(true, 2, false);
     const refreshHandler = () => getTimeTable(false, 2, true);
     Event.on(EVENT_ENUM.PLUS_LOGIN, loginHandler);
     Event.on(EVENT_ENUM.REFRESH_TIMETABLE, refreshHandler);
