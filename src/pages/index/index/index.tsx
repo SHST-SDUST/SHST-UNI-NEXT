@@ -26,7 +26,7 @@ export default function Index() {
   const [postUrl, setPostUrl] = useState("");
   const [table, setTable] = useState<TimeTableType>([]);
   const [tips, setTips] = useState("数据加载中");
-  const [tipsContent, setTipsContent] = useState("数据加载中");
+  const [tipsContent, setTipsContent] = useState("数据加载中...");
 
   const getTimeTable = (cache = true, load = 1, throttle = false) => {
     setTips("数据加载中");

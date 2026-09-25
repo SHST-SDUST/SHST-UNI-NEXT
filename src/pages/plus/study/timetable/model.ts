@@ -1,6 +1,7 @@
 import { DateTime } from "laser-utils";
 
 import type { TimeTableItem, TimeTableType } from "@/components/time-table/types";
+import { keepTimeTableCache, syncTimeTableCache } from "@/pages/index/index/model";
 import { App } from "@/utils/app";
 import { CACHE } from "@/utils/constant";
 import { HTTP } from "@/utils/request";
@@ -124,8 +125,10 @@ export const requestTimeTable = (
   return LocalStorage.getPromise<TableCache>(key).then(data => {
     if (data && data.term === App.data.curTerm) {
       console.log("GET TABLE FROM CACHE WEEK", week);
+      syncTimeTableCache();
       return { info: data.data, week: week };
     } else {
+      keepTimeTableCache();
       return requestRemoteTimeTable(week, throttle);
     }
   });

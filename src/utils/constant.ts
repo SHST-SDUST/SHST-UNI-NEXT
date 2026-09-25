@@ -12,6 +12,7 @@ export const CACHE = {
   USER_INFO: "USER_INFO",
   PLUS_TABLE: "PLUS_TABLE",
   PLUS_LAST_LOGGED_IN: "PLUS_LAST_LOGGED_IN",
+  TIMETABLE_CACHE_ASYNC: "TIMETABLE_CACHE_ASYNC",
 };
 
 export const DEV_HOST = "http://dev.shst.touchczy.top";
