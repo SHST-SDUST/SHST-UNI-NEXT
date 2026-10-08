@@ -90,11 +90,11 @@ export const App = {
       })
       .catch((err: Error) => {
         console.log(err);
-        Toast.modal(
-          "警告",
-          // @ts-expect-error errMsg
-          "数据初始化失败，点击确定重新初始化数据 \r\n" + err.errMsg || err.message || ""
-        ).then(() => {
+        const message =
+          "数据初始化失败，点击确定重新初始化数据 \r\n" +
+          "多次初始化失败，请暂时使用[小站ultra]备用小程序 \r\n";
+        // @ts-expect-error errMsg
+        Toast.modal("警告", message + err.errMsg || err.message || "").then(() => {
           App.init();
         });
       })
