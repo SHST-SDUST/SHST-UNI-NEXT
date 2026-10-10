@@ -15,7 +15,7 @@ export const CACHE = {
   TIMETABLE_CACHE_ASYNC: "TIMETABLE_CACHE_ASYNC",
 };
 
-export const DEV_HOST = "http://dev.shst.touchczy.top";
+export const DEV_HOST = "https://dev.shst.touchczy.top";
 export const PROD_HOST = "https://shst.touchczy.top";
 export const REMOTE_STATIC = DEV_HOST + "/public/static/";
 
